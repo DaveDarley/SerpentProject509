@@ -1,4 +1,5 @@
-var images = [];
+import * as Food from './nourriture.js' // probleme avec import
+
 var mesImages = {
     img0 : "./images/img"+ 0 + ".png",
     img1 : "./images/img"+ 1 + ".png",
@@ -32,6 +33,7 @@ function loadImages(sources, callback){
   }
 }
 
+
 function remplirCanvas(collisionOuPas){
   var canvas;
 
@@ -42,7 +44,9 @@ function remplirCanvas(collisionOuPas){
   }
   var layout = canvas.getContext("2d");
 
-  loadImages(mesImages, function(images){
+  Food.deplacementNourriture(layout);
+
+/*  loadImages(mesImages, function(images){
     layout.drawImage(images.img0,0,0,40,40);
     layout.drawImage(images.img1,100,200,40,40);
     layout.drawImage(images.img2,400,200,40,40);
@@ -51,6 +55,6 @@ function remplirCanvas(collisionOuPas){
     layout.drawImage(images.img5,600,600,40,40);
     layout.drawImage(images.img6,700,700,40,40);
 
-})
+})*/
 
 }
