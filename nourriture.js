@@ -18,16 +18,6 @@ constructor(image,ptsDeVie,height,width,posX,posY,vitesse,direction){
 // on se deplace un pixel a la fois , mais la vitesse a laquelle on ft ce deplacement modifie comment ca apparait a l'ecran
 
 
- deplacementNourriture(layout){
-  // pour test
-  console.log("-----------------------");
-  console.log("Ma nourriture se trouve en positionX :"+ this.posX + "positionY: "+ this.posY);
-  console.log("Ma nourriture va en direction :"+ this.direction);
-  console.log("Ma nourriture se deplace a vitesse de "+ this.vitesse);
-  console.log("-----------------------");
-
-}
-
 
 frame(layout,id){
 
@@ -42,9 +32,9 @@ frame(layout,id){
     switch(this.direction){
 
       case 0:
-        console.log("deplacement vers 0");
+        /*console.log("deplacement vers 0");
         console.log("Le nouvel x est: "+this.posX);
-        console.log("Le nouvel y est: "+this.posY);
+        console.log("Le nouvel y est: "+this.posY);*/
 
         layout.clearRect(positionX,positionY,700,700); // pour enlever le "after Image" qd la nourriture se deplace
         
@@ -54,8 +44,8 @@ frame(layout,id){
           layout.drawImage(img1, positionX,positionY,40,40);
         });
         img1.src = this.image;
-        this.posX = this.posX - 1;
-        this.posY = this.posY - 1;
+        this.posX = this.posX - 10;
+        this.posY = this.posY - 10;
       break;
 
       case 1:
@@ -150,10 +140,23 @@ frame(layout,id){
 
   }
 }
-/*
-Ces 2 fonctions permettent d'avoir la position actuelle d'une nourriture
-sur le canvas
-*/
+
+ deplacementNourriture(layout){
+  // pour test
+  console.log("-----------------------");
+  console.log("Ma nourriture se trouve en positionX :"+ this.posX + "positionY: "+ this.posY);
+  console.log("Ma nourriture va en direction :"+ this.direction);
+  console.log("Ma nourriture se deplace a vitesse de "+ this.vitesse);
+  console.log("-----------------------");
+
+  let id = null;
+  clearInterval(id);
+  //https://stackoverflow.com/questions/457826/pass-parameters-in-setinterval-function
+  // Ideal : stackoverflow.com/a/7890978/2803565
+  // ou : https://stackoverflow.com/questions/7890685/referencing-this-inside-setinterval-settimeout-within-object-prototype-methods/7890978#7890978
+  id = setInterval( () => this.frame(layout,id), this.vitesse);
+}
+
 getX(){
   return this.posX;
 }
@@ -163,6 +166,14 @@ getY(){
 getGrosseurNourriture(){
   return this.height;
 }
+
+
+
+/*
+Ces 2 fonctions permettent d'avoir la position actuelle d'une nourriture
+sur le canvas
+*/
+
 
 
 

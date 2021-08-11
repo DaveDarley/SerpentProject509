@@ -11,36 +11,13 @@ var mesNourritures = [
 ]
 
 
-
-// sources aura la liste d'Images
-/*function loadImages(sources, callback){
-  var images = {};
-  var loadedImages = 0;
-  var numImages = 0;
-
-  for(var src in sources){ // pr savoir le nb d'images qu'on a passe a cette fonction
-    numImages++;
-  }
-  for(var src in sources){
-    images[src] = new Image();
-    images[src].onload = function(){
-
-      if (++loadedImages >= numImages){
-        callback(images);
-      }
-    };
-    images[src].src = sources[src];
-  }
-}*/
-
-
 function remplirCanvas(collisionOuPas){
 
   console.log("je suis rentre ici canvas");
   var canvas;
   var nbNourriture = 0;
-
-
+  var nourritureSurLeCanvas = [];
+  var foodToRemove = [];
 
   // Pour savoir dans quel canvas le joueur est entrain de jouer
   if(collisionOuPas==1){
@@ -50,40 +27,50 @@ function remplirCanvas(collisionOuPas){
   }
   var layout = canvas.getContext("2d"); 
 
-  while(nbNourriture < 1){ // pour pas avoir plus de 2 nourritures sur le canvas en meme temps
-    // NB on a un canvas de 700*700
-      nbNourriture ++;
+  while(nbNourriture < 2){ // pour pas avoir plus de 2 nourritures sur le canvas en meme temps
+  
       
-      // test 
-      console.log("nb de nourriture live "+ nbNourriture);
+      if(nourritureSurLeCanvas.length != 0){foodToRemove = whichFoodIsLeft(nourritureSurLeCanvas);}
 
-      var xDepart =  Math.floor(Math.random() *8) * 100; 
-      var yDepart = Math.floor(Math.random() *6) * 100;
-      var direction = Math.floor(Math.random() *8);
-      var grosseur = (Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px
-      var vitesse =  (Math.floor(Math.random() *8)+1) * 1000;  // ici c'est un peu arbitraire
-      var nourriture = Math.floor(Math.random() *7) ;
-      var ptsDeVie = Math.floor(Math.random() *9) + 1;
+      if(nourritureSurLeCanvas.length <=2){
+          // test 
+          console.log("nb de nourriture live "+ nbNourriture);
 
-      let maNourriture = new Nourriture(mesNourritures[nourriture],ptsDeVie,grosseur,grosseur,xDepart,yDepart,vitesse,direction);
-      maNourriture.deplacementNourriture(layout);
+          var xDepart =  Math.floor(Math.random() *7) * 100; 
+          var yDepart = Math.floor(Math.random() *6) * 100;
+          var direction = 0;//Math.floor(Math.random() *8);
+          var grosseur = 70;//(Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px
+          var vitesse =  (Math.floor(Math.random() *8)+1) * 1000;  // ici c'est un peu arbitraire
+          var nourriture = Math.floor(Math.random() *7) ; // pour savoir quelle image afficher
+          var ptsDeVie = Math.floor(Math.random() *9) + 1; 
 
-      let id = null;
-      clearInterval(id);
-      // references:
-      //https://stackoverflow.com/questions/457826/pass-parameters-in-setinterval-function
-      
-      id = setInterval( function() { maNourriture.frame(layout,id) ;} ,vitesse); // appelle la fonction frame chaque 1 seconde
-    
+          let maNourriture = new Nourriture(mesNourritures[nourriture],ptsDeVie,grosseur,grosseur,xDepart,yDepart,vitesse,direction);
 
-    // comment savoir qu'une nourriture n'est plus sur le canvas:
-   /* for(var i = 0; i<nbNourriture ; i++){
-        
-    }*/
+          if(foodToRemove.length == 0){
+            nourritureSurLeCanvas.push(maNourriture);
+          }else{
+            var whichFood = foodToRemove.pop();
+            nourritureSurLeCanvas[whichFood] = maNourriture;
+          }
+          nourritureSurLeCanvas.forEach(function(food){
+            food.deplacementNourriture(layout);
+          });
+      }
 
+      nbNourriture++;
   }
 
 
+}
+
+function whichFoodIsLeft(foodPresent){
+    var notGoodFood = [];
+    for(var i = 0; i<foodPresent.length; i++){
+      if(foodPresent[i].getX() >= 700 || foodPresent[i].getX() <= 0 || foodPresent[i].getY() <= 0|| foodPresent[i].getY() >= 700){
+        notGoodFood.push(i);
+      }
+    }
+    return notGoodFood;
 }
 
 remplirCanvas(1);
