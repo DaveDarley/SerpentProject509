@@ -11,13 +11,23 @@ export default class Game
         this.gameHeight =gameHeight;
     }
 
+    /**Initialiser le jeu en telechargeant les images */
+    gameInitialise()
+    {
+        var img1 = new Image();
+      // attendre pour que l'image soit load 
+      img1.addEventListener('load', function(){
+      });
+      img1.src = "R.png";
+      return img1;
+    }
 
     //Fonction mettant a jour le jeu 
-    gameloop()
+    gameloop(image)
     {
-        this.serpent.mettreAJourSerpent();
+        this.serpent.mettreAJourSerpent(image);
         console.log(this.serpent.teteSerpent.positionX);
-        //window.requestAnimationFrame(()=>this.gameloop());
+        window.requestAnimationFrame(()=>this.gameloop(image));
     }
 
     /**Fonction permettant de demarrer le jeu */
@@ -28,7 +38,6 @@ export default class Game
 
         new EntreeClavier(this.serpent);
         //context.clearRect(0,0,this.gameWidth,this.gameHeight);
-
     }
 
     /**Fonction permettant de mettre  */

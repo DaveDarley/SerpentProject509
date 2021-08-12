@@ -12,4 +12,5 @@ let serpent = new Serpent(700,700,"carre",ctx);
 
 let game = new Game(canvas,ctx, serpent,700,700);
 //game.gameStart();
-game.gameloop();
+var image = game.gameInitialise();
+game.gameloop(image);

@@ -12,8 +12,6 @@ export default class Serpent
         this.pointDeVie = 100;
         this.corps = [this.teteSerpent];
         this.pointGagne = 0;
-        this.image = new Image();
-        this.image.src = "R.png";
     }
 
     //Fonction renvoyant la position de la tete du serpent 
@@ -23,29 +21,24 @@ export default class Serpent
     }
 
     /**Foonction permettant de mettre a jour le serpent sur le canvas(effacer et redessiner) */
-    mettreAJourSerpent()
+    mettreAJourSerpent(image)
     {
-        this.corps[0].positionX += 1;
+        this.corps[0].positionX += 2;
+        this.corps[0].positionY += 0.5;
         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
-        this.dessiner(this.context);
+        this.dessiner(this.context, image);
     }
 
     //Fonction permettant de dessiner le serpent
-    dessiner(context)
+    dessiner(context,image)
     {
         
         var longueurCote = this.teteSerpent.longueurCote;
-        var positSerp= this.corps[0].renvoiePosition();
-        context.fillRect(positSerp[0], positSerp[1],20,20);
-
         for(let i = 0; i < this.corps.length; i++) {
-
+            console.log("gfhf");
             var positSerp= this.corps[i].renvoiePosition();
-            var image = this.image;
-            this.image.onload = function () {
-                // (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-                context.drawImage(image, positSerp[0], positSerp[1], longueurCote,longueurCote)
-                }
+            // (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+            context.drawImage(image, positSerp[0], positSerp[1], longueurCote,longueurCote);
         }
 
 
