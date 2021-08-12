@@ -25,7 +25,7 @@ export default class Serpent
     /**Foonction permettant de mettre a jour le serpent sur le canvas(effacer et redessiner) */
     mettreAJourSerpent()
     {
-        this.corps[0].positionX += 0;
+        this.corps[0].positionX += 1;
         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
         this.dessiner(this.context);
     }
@@ -35,6 +35,8 @@ export default class Serpent
     {
         
         var longueurCote = this.teteSerpent.longueurCote;
+        var positSerp= this.corps[0].renvoiePosition();
+        context.fillRect(positSerp[0], positSerp[1],20,20);
 
         for(let i = 0; i < this.corps.length; i++) {
 
