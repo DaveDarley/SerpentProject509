@@ -4,6 +4,7 @@ export default class EntreeClavier
     constructor(serpent) 
     {
         document.addEventListener("keydown", function(){
+            alert(event.keyCode);
             switch(event.keyCode) {
               case 37:
                   console.log("gauche");

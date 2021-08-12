@@ -24,7 +24,7 @@ export default class Serpent
     mettreAJourSerpent(image)
     {
         this.corps[0].positionX += 2;
-        this.corps[0].positionY += 0.5;
+        this.corps[0].positionY += 2;
         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
         this.dessiner(this.context, image);
     }
@@ -32,15 +32,16 @@ export default class Serpent
     //Fonction permettant de dessiner le serpent
     dessiner(context,image)
     {
-        
         var longueurCote = this.teteSerpent.longueurCote;
+        var positSerp= this.corps[0].renvoiePosition();
+        context.fillRect(5, positSerp[1], longueurCote, longueurCote);
+        context.drawImage(image, positSerp[0], 0, longueurCote,longueurCote);
         for(let i = 0; i < this.corps.length; i++) {
             console.log("gfhf");
-            var positSerp= this.corps[i].renvoiePosition();
+            //var positSerp= this.corps[0].renvoiePosition();
             // (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
             context.drawImage(image, positSerp[0], positSerp[1], longueurCote,longueurCote);
         }
-
 
     }
 

@@ -27,7 +27,8 @@ export default class Game
     {
         this.serpent.mettreAJourSerpent(image);
         console.log(this.serpent.teteSerpent.positionX);
-        window.requestAnimationFrame(()=>this.gameloop(image));
+        if (this.serpent.teteSerpent.positionX < 650 || this.serpent.teteSerpent.positionY < 650){
+        window.requestAnimationFrame(()=>this.gameloop(image));}
     }
 
     /**Fonction permettant de demarrer le jeu */
