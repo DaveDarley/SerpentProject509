@@ -1,0 +1,42 @@
+.choixModeJeu:hover {
+  background-color: yellow;
+}
+.choixModeJeu {
+  text-align: center;
+  font-size: 160%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.gameScreen {
+  border: 1px solid rgb(0, 0, 0);
+
+}
+
+#canvasAvecCollision{
+  border: 1px solid rgb(231, 15, 15);
+}
+
+.parent {
+  display:flex;
+
+}
+.narrow {
+  width: 700px;
+  height: 700px;
+  border: 1px solid blue;
+}
+.wide {
+  flex: 1;
+  /* Grow to rest of container */
+  margin-left: 250px;
+}
+
+.afficheInfos {
+  width:70px;
+  height:70px;
+  border:1px solid black;
+}
+
+.infosSurLaPartie {
+  text-align:center;
+}

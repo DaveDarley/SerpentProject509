@@ -8,7 +8,8 @@ const canvas = document.getElementById('canvasAvecCollision');
 /* Contexte graphique*/
 const ctx = canvas.getContext("2d");
 
-let serpent = new Serpent(600,500,"carre");
+let serpent = new Serpent(700,700,"carre",ctx);
 
-let game = new Game(canvas,ctx, serpent);
-game.gameStart();
+let game = new Game(canvas,ctx, serpent,700,700);
+//game.gameStart();
+game.gameloop(12);
