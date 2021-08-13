@@ -1,5 +1,5 @@
 /**Chercher un moyen de sauvegarder l'ancienne position de la tete du serpent
- * il faut gerer la direction du serpent pour qu'on puisse l'agrandir
+ * il faut gerer la direction du serpent pour qu'on puisse l'agrandir en taille
  * 
 */
 
@@ -27,7 +27,7 @@ export default class Serpent
     }
 
     /**Foonction permettant de mettre a jour le serpent sur le canvas(effacer et redessiner) */
-    mettreAJourSerpent(image,directionSerpent)
+    mettreAJourSerpent(image)
     {
         /**Faire un switch permettant de changer la direction */
         // switch (directionSerpent) {
@@ -39,13 +39,15 @@ export default class Serpent
         //     break;
             
         //     case 39:
-                this.corps[0].directionSerpent = 37;
-                console.log(this.corps[0].directionSerpent);
-                console.log("lala");
-                this.corps[0].positionX += 2;
-                this.corps[0].positionY += 2;
-                this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
-                this.dessiner(this.context, image);
+                // this.corps[0].directionSerpent = 37;
+                // console.log(this.corps[0].directionSerpent);
+        for(let i = 0; i < this.corps.length; i++) {
+            this.corps[i].positionX += this.corps[i].vitesseX;
+            this.corps[i].positionY += this.corps[i].vitesseY; 
+        }
+        
+        this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
+        this.dessiner(this.context, image);
         //     break;
 
         //     case 38:
@@ -68,12 +70,12 @@ export default class Serpent
     dessiner(context,image)
     {
         var longueurCote = this.teteSerpent.longueurCote;
-        var positSerp= this.corps[0].renvoiePosition();
-        context.fillRect(5, positSerp[1], longueurCote, longueurCote);
-        context.drawImage(image, positSerp[0], 0, longueurCote,longueurCote);
+        //var positSerp= this.corps[0].renvoiePosition();
+        console.log("la taille du tableau est : " + this.corps.length);
         for(let i = 0; i < this.corps.length; i++) {
-            console.log("gfhf");
-            //var positSerp= this.corps[0].renvoiePosition();
+            var positSerp= this.corps[i].renvoiePosition();
+            console.log(positSerp[0]) ;
+            console.log(positSerp[1]) ;
             // (image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
             context.drawImage(image, positSerp[0], positSerp[1], longueurCote,longueurCote);
         }
@@ -89,32 +91,69 @@ export default class Serpent
     /**Fonction gerant les collisions */
     gestionCollision()
     {
-        this.corps.push(new Forme(formeSerp,25));
+        //Creation d'un carre a ajouter
+        let allongement = new Forme(this.teteSerpent.formeSerp,25);
+        var position = this.corps.length-1;
+        var direction = this.corps[position].direction;
+        console.log("Je suis la direction" + direction);
+        
+        switch (direction) {
+            //Gauche
+            case 37:
+                allongement.positionX = this.corps[position].positionX + this.teteSerpent.longueurCote+ this.corps[position].vitesseX;
+                allongement.positionY = this.corps[position].positionY;
+                this.corps.push(allongement);
+                this.corps[1].vitesseX = -2;
+                this.corps[1].direction = 37;
+                break;
+            
+            //Droite
+            case 39:
+            
+                break;
+
+            //Haut
+            case 38:
+            
+                break;
+        
+            //Bas
+            case 40:
+            
+                break;
+        }
+
         //this.corps.pop();
     }
 
-    /**Fonction gerant le deplacement du serpent*/
-    deplacementADroite()
+    //Gestion du corps du serpeent sans sa tete
+    gestionResteSerpent()
     {
-        this.teteSerpent.positionX += 10;
-        this.mettreAJourSerpent();
+
     }
 
-    deplacementAGauche()
-    {
-        this.teteSerpent.positionX -= 10;
-        this.mettreAJourSerpent();
-    }
+    // /**Fonction gerant le deplacement du serpent*/
+    // deplacementADroite()
+    // {
+    //     this.teteSerpent.positionX += 10;
+    //     this.mettreAJourSerpent();
+    // }
 
-    deplacementEnHaut()
-    {
-        this.teteSerpent.positionY -= 10;
-        this.mettreAJourSerpent();
-    }
+    // deplacementAGauche()
+    // {
+    //     this.teteSerpent.positionX -= 10;
+    //     this.mettreAJourSerpent();
+    // }
 
-    deplacementEnBas()
-    {
-        this.teteSerpent.positionY += 10;
-        this.mettreAJourSerpent();
-    }
+    // deplacementEnHaut()
+    // {
+    //     this.teteSerpent.positionY -= 10;
+    //     this.mettreAJourSerpent();
+    // }
+
+    // deplacementEnBas()
+    // {
+    //     this.teteSerpent.positionY += 10;
+    //     this.mettreAJourSerpent();
+    // }
 }

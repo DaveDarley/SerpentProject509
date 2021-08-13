@@ -7,12 +7,15 @@ export default class Forme
         this.longueurCote = longueurCote;
         this.positionX = 0;
         this.positionY = 0;
+        this.vitesseX = 0;
+        this.vitesseY = 0;
         this.direction = 39;
-        //this.ancienPosition = [this.teteSerpent.positionX+5, this.teteSerpent.positionX+5]
+        this.ancienPosition = [];
     }
 
     changerPosition(positionX,positionY)
     {
+        this.ancienPosition = [this.positionX,this.positionY];
         this.positionX = positionX;
         this.positionY = positionY;
     }

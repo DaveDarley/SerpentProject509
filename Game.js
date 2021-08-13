@@ -24,21 +24,19 @@ export default class Game
     }
 
     //Fonction mettant a jour le jeu 
-    gameloop(image,directionSerpent)
+    gameloop(image)
     {
-        this.serpent.mettreAJourSerpent(image,directionSerpent);
-        console.log(this.serpent.teteSerpent.positionX);
+        this.serpent.mettreAJourSerpent(image);
         if (this.serpent.teteSerpent.positionX < 650 || this.serpent.teteSerpent.positionY < 650){
-        window.requestAnimationFrame(()=>this.gameloop(image,directionSerpent));}
-        
+        window.requestAnimationFrame(()=>this.gameloop(image));}
     }
 
     /**Fonction permettant de demarrer le jeu */
-    gameStart()
+    gameStart(image)
     {
-        this.serpent.teteSerpent.changerPosition(200,400);
-        this.serpent.dessiner(this.context);
-
+        this.serpent.corps[0].vitesseX = 0;
+        this.serpent.corps[0].vitesseY = 0;
+        this.gameloop(image);
         
         //context.clearRect(0,0,this.gameWidth,this.gameHeight);
     }
