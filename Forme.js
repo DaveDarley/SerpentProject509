@@ -15,7 +15,6 @@ export default class Forme
 
     changerPosition(positionX,positionY)
     {
-        this.ancienPosition = [this.positionX,this.positionY];
         this.positionX = positionX;
         this.positionY = positionY;
     }
