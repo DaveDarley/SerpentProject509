@@ -32,118 +32,63 @@ frame(layout,id){
   if (positionX <= 0 || positionX >= 700 || positionY <= 0 || positionY >= 700){
       layout.clearRect(0,0,700,700);
       this.isOnCanvas = false;
-      clearInterval(id); // arreter setInterval ; ca n'appelle plus frame
+      //clearInterval(id); // arreter setInterval ; ca n'appelle plus frame
   }else{
     switch(this.direction){
 
       case 0:
 
       console.log("deplacement 0");
+      this.posX = this.posX - 0.4;
+      this.posY = this.posY - 0.4;
+      layout.drawImage(this.image, this.posX,this.posY,40,40);
+      
 
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-        if((this.imgOK(this.image))){
-          layout.drawImage(this.image, positionX,positionY,40,40);
-        }else{
-          var img1 = new Image();
-          // attendre pour que l'image soit load avant de le dessiner!!
-          img1.addEventListener('load', function(){
-            layout.drawImage(img1, positionX,positionY,40,40);
-          });
-          img1.src = this.image;
-        }
-        
-
-        this.posX = this.posX - 1;
-        this.posY = this.posY - 1;
       break;
 
       case 1:
         console.log("deplacement vers 1");
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-        var img1 = new Image();
-        // attendre pour que l'image soit load avant de le dessiner!!
-        img1.addEventListener('load', function(){
-          layout.drawImage(img1, positionX,positionY,grosseur,grosseur);
-        });
-        img1.src = this.image;
-        this.posY = this.posY - 1;
+        layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
+        this.posY = this.posY - 0.4;
       break;
 
       case 2:
         console.log("deplacement vers 2");
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-     
-        var img1 = new Image();
-        // attendre pour que l'image soit load avant de le dessiner!!
-        img1.addEventListener('load', function(){
-          layout.drawImage(img1, positionX,positionY,grosseur,grosseur);
-        });
-        img1.src = this.image;
-        this.posX = this.posX + 1;
-        this.posY = this.posY - 1;
+        layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
+        this.posX = this.posX + 0.4;
+        this.posY = this.posY - 0.4;
       break;
 
       case 3:
         console.log("deplacement vers 3");
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-        var img1 = new Image();
-        // attendre pour que l'image soit load avant de le dessiner!!
-        img1.addEventListener('load', function(){
-          layout.drawImage(img1, positionX,positionY,grosseur,grosseur);
-        });
-        img1.src = this.image;
-        this.posX = this.posX + 1;
-    
+        layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
+        this.posX = this.posX + 0.4;
       break;
 
       case 4:
         console.log("deplacement vers 4");
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-        var img1 = new Image();
-        // attendre pour que l'image soit load avant de le dessiner!!
-        img1.addEventListener('load', function(){
-          layout.drawImage(img1, positionX,positionY,grosseur,grosseur);
-        });
-        img1.src = this.image;
-        this.posX = this.posX + 1;
-        this.posY = this.posY + 1;
+        layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
+        this.posX = this.posX + 0.4;
+        this.posY = this.posY + 0.4;
       break;
 
       case 5:
         console.log("deplacement vers 5");
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-        var img1 = new Image();
-        // attendre pour que l'image soit load avant de le dessiner!!
-        img1.addEventListener('load', function(){
-          layout.drawImage(img1, positionX,positionY,grosseur,grosseur);
-        });
-        img1.src = this.image;
-        this.posY = this.posY + 1;
+        layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
+        this.posY = this.posY + 0.4;
       break;
 
       case 6:
         console.log("deplacement vers 6");
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-        var img1 = new Image();
-        // attendre pour que l'image soit load avant de le dessiner!!
-        img1.addEventListener('load', function(){
-          layout.drawImage(img1, positionX,positionY,grosseur,grosseur);
-        });
-        img1.src = this.image;
-        this.posX = this.posX - 1;
-        this.posY = this.posY + 1;
+        layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
+        this.posX = this.posX - 0.4;
+        this.posY = this.posY + 0.4;
       break;
 
       case 7:
         console.log("deplacement vers 7");
-        layout.clearRect(0,0,700,700); // pour enlever le "after Image" qd la nourriture se deplace
-        var img1 = new Image();
-        // attendre pour que l'image soit load avant de le dessiner!!
-        img1.addEventListener('load', function(){
-          layout.drawImage(img1, positionX,positionY,grosseur,grosseur);
-        });
-        img1.src = this.image;
-        this.posX = this.posX - 1;
+        layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
+        this.posX = this.posX - 0.4;
       break;
     }
 
@@ -180,15 +125,9 @@ getGrosseurNourriture(){
   return this.height;
 }
 
- imgOK(img) {
-  if (!img.complete) {
-      return false;
-  }
-  if (typeof img.naturalWidth != "undefined" && img.naturalWidth == 0) {
-      return false;
-  }
-  return true;
-}
+
+
+
 
 
 
