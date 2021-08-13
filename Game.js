@@ -24,12 +24,12 @@ export default class Game
     }
 
     //Fonction mettant a jour le jeu 
-    gameloop(image)
+    gameloop(image,directionSerpent)
     {
-        this.serpent.mettreAJourSerpent(image);
+        this.serpent.mettreAJourSerpent(image,directionSerpent);
         console.log(this.serpent.teteSerpent.positionX);
         if (this.serpent.teteSerpent.positionX < 650 || this.serpent.teteSerpent.positionY < 650){
-        window.requestAnimationFrame(()=>this.gameloop(image));}
+        window.requestAnimationFrame(()=>this.gameloop(image,directionSerpent));}
         
     }
 

@@ -27,14 +27,41 @@ export default class Serpent
     }
 
     /**Foonction permettant de mettre a jour le serpent sur le canvas(effacer et redessiner) */
-    mettreAJourSerpent(image)
+    mettreAJourSerpent(image,directionSerpent)
     {
         /**Faire un switch permettant de changer la direction */
+        // switch (directionSerpent) {
+        //     case 37:
+        //         this.corps[0].positionX += -2;
+        //         console.log(this.teteSerpent.positionX);
+        //         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
+        //         this.dessiner(this.context, image);
+        //     break;
+            
+        //     case 39:
+                this.corps[0].directionSerpent = 37;
+                console.log(this.corps[0].directionSerpent);
+                console.log("lala");
+                this.corps[0].positionX += 2;
+                this.corps[0].positionY += 2;
+                this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
+                this.dessiner(this.context, image);
+        //     break;
+
+        //     case 38:
+        //         this.corps[0].positionY += -2;
+        //         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
+        //         this.dessiner(this.context, image);
+        //     break;
+
+        //     case 40:
+        //         this.corps[0].positionY += 2;
+        //         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
+        //         this.dessiner(this.context, image);
+        //     break;
         
-        this.corps[0].positionX += 2;
-        this.corps[0].positionY += 2;
-        this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
-        this.dessiner(this.context, image);
+        //}
+        
     }
 
     //Fonction permettant de dessiner le serpent

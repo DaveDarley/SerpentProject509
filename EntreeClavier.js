@@ -4,7 +4,7 @@ export default class EntreeClavier
     constructor(serpent) 
     {
         document.addEventListener("keydown", function(){
-            alert("event.keyCode");
+            alert(event.keyCode);
             switch(event.keyCode) {
               case 37:
                   console.log("gauche");
@@ -12,16 +12,19 @@ export default class EntreeClavier
             break;
             
             case 39:
+                console.log("droite");
                 //serpent.deplacementADroite();
                 //gestionCollision();
             break;
 
             case 38:
-                serpent.deplacementEnHaut();
+                console.log("Haut");
+                //serpent.deplacementEnHaut();
             break;
 
             case 40:
-                serpent.deplacementEnBas();
+                console.log("Bas");
+                //serpent.deplacementEnBas();
             break;
 
             }
