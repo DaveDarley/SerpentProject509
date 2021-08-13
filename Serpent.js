@@ -3,7 +3,6 @@
  * 
 */
 
-
 import Forme from "./Forme.js";
 
 export default class Serpent
@@ -32,8 +31,10 @@ export default class Serpent
 
         for(let i = 0; i < this.corps.length; i++) {
             this.corps[i].ancienPosition = [this.corps[i].positionX,this.corps[i].positionY];
+            this.gestionResteSerpent(this.corps[i].direction); 
             this.corps[i].positionX += this.corps[i].vitesseX;
-            this.corps[i].positionY += this.corps[i].vitesseY; 
+            this.corps[i].positionY += this.corps[i].vitesseY;
+            
         }
         
         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
@@ -113,7 +114,7 @@ export default class Serpent
         //this.corps.pop();
     }
 
-    //Gestion du corps du serpeent sans sa tete
+    //Gestion du corps du serpent sans sa tete
     gestionResteSerpent(direction)
     {
         console.log("Je suis entre dans gestionResteSerpent partie 0");
@@ -164,7 +165,7 @@ export default class Serpent
                         this.corps[i].direction = 37;
                     } else {
                         this.corps[i].vitesseX = 0;
-                        this.corps[i].vitesseY = this.corps[i-1].vitesseX;
+                        this.corps[i].vitesseY = 2;
                         this.corps[i].direction = this.corps[i-1].direction;
                     }
                 }
