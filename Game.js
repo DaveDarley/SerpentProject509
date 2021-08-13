@@ -14,6 +14,7 @@ export default class Game
     /**Initialiser le jeu en telechargeant les images */
     gameInitialise()
     {
+        new EntreeClavier(this.serpent);
         var img1 = new Image();
       // attendre pour que l'image soit load 
       img1.addEventListener('load', function(){
@@ -29,6 +30,7 @@ export default class Game
         console.log(this.serpent.teteSerpent.positionX);
         if (this.serpent.teteSerpent.positionX < 650 || this.serpent.teteSerpent.positionY < 650){
         window.requestAnimationFrame(()=>this.gameloop(image));}
+        
     }
 
     /**Fonction permettant de demarrer le jeu */
@@ -37,7 +39,7 @@ export default class Game
         this.serpent.teteSerpent.changerPosition(200,400);
         this.serpent.dessiner(this.context);
 
-        new EntreeClavier(this.serpent);
+        
         //context.clearRect(0,0,this.gameWidth,this.gameHeight);
     }
 

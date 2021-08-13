@@ -1,3 +1,9 @@
+/**Chercher un moyen de sauvegarder l'ancienne position de la tete du serpent
+ * il faut gerer la direction du serpent pour qu'on puisse l'agrandir
+ * 
+*/
+
+
 import Forme from "./Forme.js";
 
 export default class Serpent
@@ -23,6 +29,8 @@ export default class Serpent
     /**Foonction permettant de mettre a jour le serpent sur le canvas(effacer et redessiner) */
     mettreAJourSerpent(image)
     {
+        /**Faire un switch permettant de changer la direction */
+        
         this.corps[0].positionX += 2;
         this.corps[0].positionY += 2;
         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
@@ -54,7 +62,7 @@ export default class Serpent
     /**Fonction gerant les collisions */
     gestionCollision()
     {
-        //this.corps.push(new Forme());
+        this.corps.push(new Forme(formeSerp,25));
         //this.corps.pop();
     }
 
