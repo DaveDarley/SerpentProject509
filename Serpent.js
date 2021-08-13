@@ -29,13 +29,17 @@ export default class Serpent
     mettreAJourSerpent(image)
     {
 
-        for(let i = 0; i < this.corps.length; i++) {
-            this.corps[i].ancienPosition = [this.corps[i].positionX,this.corps[i].positionY];
-            this.gestionResteSerpent(this.corps[i].direction); 
-            this.corps[i].positionX += this.corps[i].vitesseX;
-            this.corps[i].positionY += this.corps[i].vitesseY;
+      //  for(let i = 0; i < this.corps.length; i++) {
+            // this.corps[i].ancienPosition = [this.corps[i].positionX,this.corps[i].positionY];
+            var ancienTeteX = this.corps[0].positionX;
+            var ancienTeteY = this.corps[0].positionY;
             
-        }
+            this.corps[0].positionX += this.corps[0].vitesseX;
+            this.corps[0].positionY += this.corps[0].vitesseY;
+
+            this.gestionResteSerpent(this.corps[0].direction,ancienTeteX,ancienTeteY,1);
+            
+     //   }
         
         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
         this.dessiner(this.context, image);
@@ -114,8 +118,48 @@ export default class Serpent
         //this.corps.pop();
     }
 
+     gestionResteSerpent(direction,ancienX,ancienY,z)
+    {
+       var ancienPosX = 0;
+       var ancienPosY = 0;
+
+       var x= 0; var y = 0;
+
+      for(var i = 1; i<this.corps.length; i++){
+         if(i == 1){
+           x = this.corps[i].positionX;
+           y = this.corps[i].positionY;
+
+           this.corps[i].positionX =  ancienX;
+           this.corps[i].positionY = ancienY;
+         }else{
+          ancienPosX = this.corps[i].positionX;
+          ancienPosY = this.corps[i].positionY;
+          
+          this.corps[i].positionX = x;
+          this.corps[i].positionY = y;
+
+            x = ancienPosX;
+            y = ancienPosY;
+         }
+      } 
+    /*  if(i < this.corps.length){
+        var newX = this.corps[i].positionX;
+        var newY = this.corps[i].positionY;
+  
+        this.corps[i].positionX = ancienX;
+        this.corps[i].positionY = ancienY;
+         var newIndex = i++;
+        this.gestionResteSerpent(direction,newX,newY,newIndex);*/
+      }
+
+
+
+
+    
+
     //Gestion du corps du serpent sans sa tete
-    gestionResteSerpent(direction)
+   /* gestionResteSerpent(direction)
     {
         console.log("Je suis entre dans gestionResteSerpent partie 0");
         switch (direction) {
@@ -125,7 +169,7 @@ export default class Serpent
                     if (this.corps[i].positionX > this.corps[i-1].ancienPosition[0] ) {
                     } else {
                         this.corps[i].vitesseX = this.corps[i-1].vitesseX;
-                        this.corps[i].vitesseY = this.corps[i-1].vitesseX;
+                        this.corps[i].vitesseY = this.corps[i-1].vitesseY;
                         this.corps[i].direction = this.corps[i-1].direction;
                     }
                 }
@@ -137,7 +181,7 @@ export default class Serpent
                     if (this.corps[i].positionX < this.corps[i-1].ancienPosition[0] ) {
                     } else {
                         this.corps[i].vitesseX = this.corps[i-1].vitesseX;
-                        this.corps[i].vitesseY = this.corps[i-1].vitesseX;
+                        this.corps[i].vitesseY = this.corps[i-1].vitesseY;
                         this.corps[i].direction = this.corps[i-1].direction;
                     }
                 }
@@ -172,7 +216,7 @@ export default class Serpent
                 break;
         }
 
-    }
+    } */
 
     // /**Fonction gerant le deplacement du serpent*/
     // deplacementADroite()
