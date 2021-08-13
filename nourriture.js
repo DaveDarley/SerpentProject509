@@ -16,8 +16,6 @@ constructor(image,ptsDeVie,height,width,posX,posY,vitesse,direction,isOnCanvas){
 }
 
 
-// Comprehension pour la vitesse : 
-// on se deplace un pixel a la fois , mais la vitesse a laquelle on ft ce deplacement modifie comment ca apparait a l'ecran
 
 
 
@@ -39,9 +37,10 @@ frame(layout,id){
       case 0:
 
       console.log("deplacement 0");
+      layout.drawImage(this.image, this.posX,this.posY,40,40);
       this.posX = this.posX - 0.4;
       this.posY = this.posY - 0.4;
-      layout.drawImage(this.image, this.posX,this.posY,40,40);
+      
       
 
       break;
@@ -115,6 +114,10 @@ frame(layout,id){
   this.frame(layout,id);
 }
 
+/*
+Ces 2 fonctions permettent d'avoir la position actuelle d'une nourriture
+sur le canvas
+*/
 getX(){
   return this.posX;
 }
@@ -131,10 +134,7 @@ getGrosseurNourriture(){
 
 
 
-/*
-Ces 2 fonctions permettent d'avoir la position actuelle d'une nourriture
-sur le canvas
-*/
+
 
 
 
