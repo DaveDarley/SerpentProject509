@@ -1,6 +1,7 @@
 import Nourriture from "./nourriture.js";
 import ObsColli from "./obstacleCadreAvecCollision.js"
 import obsSansColli from "./obstacleCadreSansCollision.js"
+import { startGame } from "./pausePlayRestart.js"
 
 /*
 Les nourritures a afficher soit dans le cadre avec collision ou sans collision
@@ -35,6 +36,9 @@ var imageObstacle= [
   "./images/obstacle4.png",
   "./images/obstacle5.png"
 ]
+
+var Pause , Restart , Quit = false ;
+
 
 
 /*
@@ -93,23 +97,33 @@ function remplirCanvas(collisionOuPas){
 }
 
 /*
-Fonction qui s'occupe de faire apparaitre et bouger les nourritures sur le canvas , 
-peut importe cadre avec collision ou sans collisions ; on a un nombre de 2 nourritures
-en tout temps sur le canvas , des qu'un quitte le canvas , un autre apparait a un 
-endroit sur le canvas de facon aleatoire 
+  Fonction qui s'occupe de faire apparaitre et bouger les nourritures sur le canvas , 
+  peut importe cadre avec collision ou sans collisions ; on a un nombre de 2 nourritures
+  en tout temps sur le canvas , des qu'un quitte le canvas , un autre apparait a un 
+  endroit sur le canvas de facon aleatoire 
 */
 
-// Pour bawo a partir de la fonction Animation t'as acces :
-// aux nourritures qui sont sur le canvas grace au parametre nourritureSurleCanvas;
-// aux obstacles qui sont sur le canvas grace soit a obsSurLecanvas (si on utilise cadre avec collision) ou
-// mesObs (si on utilise cadre sans collision)
-
-// les tableaux contiennent des instances de la classe Nourriture/Obstacle et ces 2 classes ont les proprietes
-// posX , posY , grosseur (ces 3 proprietes permet a gerer la collision avec la tete du serpent!!)
+/*
+  Cette fonction gere tout l'animation du jeu
+*/
 
 function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs){
 
   layout.clearRect(0,0,700,700);
+
+  if(Restart){
+    location.reload(); // reload ma page html
+    Restart = false;
+  }
+
+  if(Quit){
+    // je dois cancel mon animation ici ??
+    window.location.href='index.html';
+  }
+
+
+
+
 
   // tout nourriture qui excede les limites du canvas est enleve de la liste de nourriture a dessiner
   if(nourritureSurLeCanvas.length != 0){
@@ -134,17 +148,17 @@ function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,ob
   }
   nourritureSurLeCanvas.forEach(function(food){
     food.deplacementNourriture(layout);
- });
+});
 
- // Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
- if(colliOuPas == 1){ 
+// Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
+if(colliOuPas == 1){ 
     animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded);
   }else{
     mesObs.forEach(function(Obs){
     Obs.placerMonObstacle(layout);
     });
   }
-
+  
  requestAnimationFrame(function() {animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs)});
 }
 
@@ -259,4 +273,28 @@ function loadImages(tabImagesNonLoad){
     return loadedImages;
 }
 
-//remplirCanvas(1);
+
+
+export function entreeUser(userEntry){
+  switch(userEntry){
+          case "pause":
+              if(Pause){ // Si pause est deja en true c que notre jeu est deja en pause ; on veut resume
+                Pause = false;
+              }else{
+                Pause = true; 
+              }
+              break;
+          case "quit":
+              Quit = true;
+              break;
+          case "restart":
+              Restart = true;
+              break;
+  }
+}
+
+
+
+
+// Appel de fonction qui commence tout 
+remplirCanvas(startGame());

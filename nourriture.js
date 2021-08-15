@@ -97,11 +97,11 @@ frame(layout,id){
 
  deplacementNourriture(layout){
   // pour test
-  console.log("-----------------------");
+  /*console.log("-----------------------");
   console.log("Ma nourriture se trouve en positionX :"+ this.posX + "positionY: "+ this.posY);
   console.log("Ma nourriture va en direction :"+ this.direction);
   console.log("Ma nourriture se deplace a vitesse de "+ this.vitesse);
-  console.log("-----------------------");
+  console.log("-----------------------");*/
 
   this.isOnCanvas = true;
   let id = null;

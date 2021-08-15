@@ -20,8 +20,8 @@ export default class obstacleSansCollision {
             console.log("Mon tableau est: "+ mesPositions);
             return mesPositions;
         }else{
-            var xPosition = 200+(Math.floor(Math.random() * 4)*100);
-            var yPosition = 200+(Math.floor(Math.random() * 4)*100);
+            var xPosition = (Math.floor(Math.random() * 7)*100); // x entre 0 et 600
+            var yPosition = (Math.floor(Math.random() * 7)*100); // x entre 0 et 600
 
             if(mesPositions.length == 0){
                 var newTab = [];
