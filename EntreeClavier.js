@@ -17,7 +17,7 @@ export default class EntreeClavier
                 serpent.corps[0].vitesseY = 0;
                 serpent.corps[0].direction = 37;
                 // dave a modifie celui la aussi
-                if (serpent.corps.length > 1){serpent.gestionResteSerpent(37,ancienXTete,ancienYTete,1);}
+                if (serpent.corps.length > 1){serpent.gestionResteSerpent(37,ancienXTete,ancienYTete);}
             break;
                 //Droite
             case 39:
@@ -30,7 +30,7 @@ export default class EntreeClavier
                 serpent.corps[0].vitesseX = 2;
                 serpent.corps[0].vitesseY = 0;
                 serpent.corps[0].direction = 39;
-                if (serpent.corps.length > 1){serpent.gestionResteSerpent(39,ancienXTete,ancienYTete,1);}
+                if (serpent.corps.length > 1){serpent.gestionResteSerpent(39,ancienXTete,ancienYTete);}
             break;
                 //Haut
             case 38:
@@ -44,7 +44,7 @@ export default class EntreeClavier
                 serpent.corps[0].vitesseX = 0;
                 serpent.corps[0].vitesseY= -2;
                 serpent.corps[0].direction = 38;
-                if (serpent.corps.length > 1){serpent.gestionResteSerpent(38,ancienXTete,ancienYTete,1);}
+                if (serpent.corps.length > 1){serpent.gestionResteSerpent(38,ancienXTete,ancienYTete);}
             break;
                 //Bas
             case 40:
@@ -58,7 +58,7 @@ export default class EntreeClavier
                 serpent.corps[0].vitesseX = 0;
                 serpent.corps[0].vitesseY = 2;
                 serpent.corps[0].direction = 40;
-                if (serpent.corps.length > 1){serpent.gestionResteSerpent(40,ancienXTete,ancienYTete,1);}
+                if (serpent.corps.length > 1){serpent.gestionResteSerpent(40,ancienXTete,ancienYTete);}
             break;
 
             case 65:

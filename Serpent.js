@@ -25,7 +25,7 @@ export default class Serpent
         return this.corps[0].renvoiePosition();
     }
 
-    /**Foonction permettant de mettre a jour le serpent sur le canvas(effacer et redessiner) */
+    /**Fonction permettant de mettre a jour le serpent sur le canvas(effacer et redessiner) */
     mettreAJourSerpent(image)
     {
 
@@ -37,7 +37,7 @@ export default class Serpent
             this.corps[0].positionX += this.corps[0].vitesseX;
             this.corps[0].positionY += this.corps[0].vitesseY;
 
-            this.gestionResteSerpent(this.corps[0].direction,ancienTeteX,ancienTeteY,1);
+            this.gestionResteSerpent(this.corps[0].direction,ancienTeteX,ancienTeteY);
             
      //   }
         
@@ -118,7 +118,7 @@ export default class Serpent
         //this.corps.pop();
     }
 
-     gestionResteSerpent(direction,ancienX,ancienY,z)
+     gestionResteSerpent(direction,ancienX,ancienY)
     {
        var ancienPosX = 0;
        var ancienPosY = 0;

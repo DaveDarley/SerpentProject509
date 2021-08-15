@@ -16,11 +16,11 @@ export default class Game
     {
         new EntreeClavier(this.serpent);
         var img1 = new Image();
-      // attendre pour que l'image soit load 
-      img1.addEventListener('load', function(){
-      });
-      img1.src = "R.png";
-      return img1;
+        // attendre pour que l'image soit load 
+        img1.addEventListener('load', function(){
+        });
+        img1.src = "R.png";
+        return img1;
     }
 
     //Fonction mettant a jour le jeu 
