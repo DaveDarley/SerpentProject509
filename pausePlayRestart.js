@@ -3,7 +3,7 @@
 
 // Source: https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
-import { entreeUser } from './index.js'
+import { entreeUser } from './animation.js'
 
 export function addEvent(){
     // Trop repetitif faut que je trouve un autre moyen de faire ca !!
@@ -18,6 +18,7 @@ export function addEvent(){
         entreeUser("restart");
     });
 }
+
 
 // Pour savoir quelle page a ete load 
 // sans Collision ou avec Collision
