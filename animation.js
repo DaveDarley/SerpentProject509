@@ -39,6 +39,10 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
       window.location.href='index.html';
     }
 
+   /*
+    Si l'utilisateur clique sur pause , notre animation continue sauf
+    qu'on redessine a chaque animation les objets a la meme position
+   */
 
    if(!Pause){
         // tout nourriture qui excede les limites du canvas est enleve de la liste de nourriture a dessiner
@@ -76,6 +80,7 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
         }
 
     }else{
+
         nourritureSurLeCanvas.forEach(function(food){
             layout.drawImage(food.image,food.posX,food.posY,food.getGrosseurNourriture(),food.getGrosseurNourriture())
         });
@@ -112,27 +117,33 @@ export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
     if(obsSurLeCanvas.length < 2){
       var whichDirection = Math.floor(Math.random() *4); // 4 murs d'ou peuvent sortir les obstacles
       var posX; var posY;
+      var grosseur = (Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px
+      var ptsDeVieEnleves = Math.floor(Math.random() *9) + 1; 
+      var imgObs = Math.floor(Math.random() *4) ; // pour savoir quelle image d'obstacle afficher 
+
       switch(whichDirection){
         case 0:  // Mur Nord
-          posX = (Math.floor(Math.random() *8) * 100); 
-          posY = 0;
+          document.getElementById("obsFromWhere").innerHTML = "NORD";
+          posX = (Math.floor(Math.random() *8) * 100) ; 
+          posY = 0 ;
           break;
         case 1: // Mur Est
+          document.getElementById("obsFromWhere").innerHTML = "EST";
           posX = 700; 
           posY = (Math.floor(Math.random() *8) * 100);
           break;
         case 2: // Mur Sud
+          document.getElementById("obsFromWhere").innerHTML = "SUD";
           posX = (Math.floor(Math.random() *8) * 100); 
           posY = 700;
           break;
         case 3: // Mur ouest
-          posX = 0; 
-          posY = (Math.floor(Math.random() *8) * 100);
+          document.getElementById("obsFromWhere").innerHTML = "OUEST";
+          posX = 0 ; 
+          posY = (Math.floor(Math.random() *8) * 100) ;
           break;
       }
-      var grosseur = (Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px
-      var ptsDeVieEnleves = Math.floor(Math.random() *9) + 1; 
-      var imgObs = Math.floor(Math.random() *4) ; // pour savoir quelle image d'obstacle afficher 
+
   
       let monObstacle = new ObsColli(obsImageLoaded[imgObs],ptsDeVieEnleves,grosseur,posX,posY,whichDirection,false,posX,posY);
       obsSurLeCanvas.push(monObstacle);
@@ -153,7 +164,7 @@ Idee : Avec le cadre sans collision, les obstacles sont places sur le canvas
 */
 
 export function animationObstacleSansColli(tabPosObs,imgObs){
- 
+
     var obsSansCollision = [];
     for(var i = 0; i<tabPosObs.length; i++){
         // G 5 images pour les obstacles, a chaque fois je veux dessiner un,je choisis aleatoirement parmis mon tableau d'images

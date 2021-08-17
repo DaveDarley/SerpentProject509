@@ -19,6 +19,7 @@
 .narrow {
   width: 700px;
   height: 700px;
+  background-image: url("./images/backgroundCanvas.png")
 }
 .wide {
   flex: 1;
@@ -30,6 +31,9 @@
   width:70px;
   height:70px;
   border:1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .infosSurLaPartie {

@@ -1,3 +1,5 @@
+// Lien vers mes png : http://pngimg.com/images/nature/stone
+
 import Nourriture from "./nourriture.js";
 import ObsColli from "./obstacleCadreAvecCollision.js"
 import obsSansColli from "./obstacleCadreSansCollision.js"
@@ -30,7 +32,7 @@ var mesObstacles = [
   "./images/obsColli1.png",
   "./images/obsColli2.png",
   "./images/obsColli3.png",
-  "./images/obsColli4.jpeg"
+  "./images/obsColli4.png"
 ]
 
 /*

@@ -28,8 +28,8 @@ frame(layout,id){
 
   
 
-  if (positionX <= 0 || positionX >= 700 || positionY <= 0 || positionY >= 700){
-      layout.clearRect(0,0,700,700);
+  if (positionX + grosseur <= 0 || positionX >= 700 || positionY + grosseur <= 0 || positionY >= 700){
+      //layout.clearRect(0,0,700,700);
       this.isOnCanvas = false;
       //clearInterval(id); // arreter setInterval ; ca n'appelle plus frame
   }else{
