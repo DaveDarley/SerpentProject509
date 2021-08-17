@@ -13,6 +13,7 @@ constructor(image,ptsDeVie,height,width,posX,posY,vitesse,direction,isOnCanvas){
   this.direction = direction;
   this.isOnCanvas = false;
 
+
 }
 
 
@@ -37,7 +38,7 @@ frame(layout,id){
       case 0:
 
       console.log("deplacement 0");
-      layout.drawImage(this.image, this.posX,this.posY,40,40);
+      layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
       this.posX = this.posX - 0.4;
       this.posY = this.posY - 0.4;
       

@@ -26,6 +26,8 @@ var Pause , Restart , Quit = false ;
 export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs){
 
     layout.clearRect(0,0,700,700);
+
+
   
     if(Restart){
       location.reload(); // reload ma page html
@@ -37,38 +39,58 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
       window.location.href='index.html';
     }
 
-    // tout nourriture qui excede les limites du canvas est enleve de la liste de nourriture a dessiner
-    if(nourritureSurLeCanvas.length != 0){
-      nourritureSurLeCanvas = checkFoodOnCanvas(nourritureSurLeCanvas);
-    }
+
+   if(!Pause){
+        // tout nourriture qui excede les limites du canvas est enleve de la liste de nourriture a dessiner
+        if(nourritureSurLeCanvas.length != 0){
+        nourritureSurLeCanvas = checkFoodOnCanvas(nourritureSurLeCanvas);
+        }
+        
+        // Si nb de nourriture sur le canvas < 2 alors on ajoute un autre nourriture
+        if(nourritureSurLeCanvas.length < 2){
+        var xDepart =  (Math.floor(Math.random() *5) * 100)+150; 
+        var yDepart = (Math.floor(Math.random() *5) * 100)+150;
+        var direction = Math.floor(Math.random() *8);
+        var grosseur = (Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px
     
-    // Si nb de nourriture sur le canvas < 2 alors on ajoute un autre nourriture
-    if(nourritureSurLeCanvas.length < 2){
-      var xDepart =  (Math.floor(Math.random() *5) * 100)+150; 
-      var yDepart = (Math.floor(Math.random() *5) * 100)+150;
-      var direction = Math.floor(Math.random() *8);
-      var grosseur = (Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px
-  
-      // doit modifier parce que je l'utilise pas encore lors du redessinement du canvas
-      var vitesse =  (Math.floor(Math.random() *8)+1) * 1000;  // ici c'est un peu arbitraire
-  
-      var nourriture = Math.floor(Math.random() *7) ; // pour savoir quelle image afficher
-      var ptsDeVie = Math.floor(Math.random() *9) + 1; 
-  
-      let maNourriture = new Nourriture(lesNourritures[nourriture],ptsDeVie,grosseur,grosseur,xDepart,yDepart,vitesse,direction,false);
-      nourritureSurLeCanvas.push(maNourriture);
-    }
-    nourritureSurLeCanvas.forEach(function(food){
-      food.deplacementNourriture(layout);
-  });
-  
-  // Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
-  if(colliOuPas == 1){ 
-      animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded);
+        // doit modifier parce que je l'utilise pas encore lors du redessinement du canvas
+        var vitesse =  (Math.floor(Math.random() *8)+1) * 1000;  // ici c'est un peu arbitraire
+    
+        var nourriture = Math.floor(Math.random() *7) ; // pour savoir quelle image afficher
+        var ptsDeVie = Math.floor(Math.random() *9) + 1; 
+    
+        let maNourriture = new Nourriture(lesNourritures[nourriture],ptsDeVie,grosseur,grosseur,xDepart,yDepart,vitesse,direction,false);
+        nourritureSurLeCanvas.push(maNourriture);
+        }
+        nourritureSurLeCanvas.forEach(function(food){
+        food.deplacementNourriture(layout);
+        });
+    
+        // Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
+        if(colliOuPas == 1){ 
+            animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded);
+        }else{
+            mesObs.forEach(function(Obs){
+            Obs.placerMonObstacle(layout);
+            });
+        }
+
     }else{
-      mesObs.forEach(function(Obs){
-      Obs.placerMonObstacle(layout);
-      });
+        nourritureSurLeCanvas.forEach(function(food){
+            layout.drawImage(food.image,food.posX,food.posY,food.getGrosseurNourriture(),food.getGrosseurNourriture())
+        });
+        // Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
+        if(colliOuPas == 1){ 
+            obsSurLeCanvas.forEach(function(food){
+                layout.drawImage(food.image,food.posX,food.posY,food.grosseur,food.grosseur)
+            });
+        }else{
+            mesObs.forEach(function(Obs){
+                Obs.placerMonObstacle(layout);
+            });
+        }
+
+
     }
     
    requestAnimationFrame(function() {animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs)});
@@ -167,10 +189,10 @@ export function entreeUser(userEntry){
     switch(userEntry){
             case "pause":
                 if(Pause){ // Si pause est deja en true c que notre jeu est deja en pause ; on veut resume
-                  document.getElementById("pause").innerHTML = "1) Resume";
+                  document.getElementById("pause").innerHTML = "1) Pause";
                   Pause = false;
                 }else{
-                  document.getElementById("pause").innerHTML = "1) Pause";
+                  document.getElementById("pause").innerHTML = "1) resume";
                   Pause = true; 
                 }
                 break;
