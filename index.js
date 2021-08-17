@@ -15,7 +15,8 @@ let serpent = new Serpent(700,700,"carre",ctx);
 /**Creation de la partie  */
 let game = new Game(canvas,ctx, serpent,700,700);
 
-//game.gameStart();
+/**Initialisation de la partie */
 var image = game.gameInitialise();
 
+/**Debut de la partie */
 game.gameStart(image);

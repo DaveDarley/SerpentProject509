@@ -10,7 +10,6 @@ export default class Forme
         this.vitesseX = 0;
         this.vitesseY = 0;
         this.direction = 39;
-        this.ancienPosition = [];
     }
 
     changerPosition(positionX,positionY)
