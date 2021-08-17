@@ -1,5 +1,7 @@
+/*https://stackoverflow.com/questions/14073498/how-do-i-create-a-change-in-font-size-on-hover-without-realigning-other-text */
+
 .choixModeJeu:hover {
-  background-color: yellow;
+  font-size: 50px;
 }
 .choixModeJeu {
   text-align: center;
@@ -7,6 +9,9 @@
   font-size: 160%;
   margin-top: 10px;
   margin-bottom: 10px;
+
+  line-height: 50px;
+  display: block;
 }
 .gameScreen {
   border: 1px solid black;
