@@ -3,6 +3,7 @@
 }
 .choixModeJeu {
   text-align: center;
+  color:white;
   font-size: 160%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -33,4 +34,27 @@
 
 .infosSurLaPartie {
   text-align:center;
+}
+
+.Page{
+  background-color: antiquewhite;
+  background-image: url(https://cdn.discordapp.com/attachments/820323441818992690/877233927729852436/Snake-Illustration-with-Transparent-Background-680x680.png);
+  
+}
+
+.Bienvenue{
+  color:white;
+  background-image: url(https://thumbs.dreamstime.com/z/vintage-background-frame-vintage-background-frame-design-paper-decoration-128717526.jpg);
+  height: fit-content;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid black;
+  border-radius: 150px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  
 }
