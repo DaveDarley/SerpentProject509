@@ -19,7 +19,6 @@ export default class Serpent
         this.pointGagne = 0;
         this.dernierPositionTeteSerpent= [];
         this.changerDirect = false;
-        this.ancienDirection  = 0
     }
 
     //Fonction renvoyant la position de la tete du serpent 
@@ -37,12 +36,32 @@ export default class Serpent
             // var ancienTeteY = this.corps[0].positionY;
             this.corps[i].positionX += this.corps[i].vitesseX;
             this.corps[i].positionY += this.corps[i].vitesseY;
+
+            if (this.changerDirect == true && i > 0)
+            {
+                this.gestionResteSerpent(this.corps[i-1].ancienDirection);
+            }
+       }
+
+       if (this.corps[i].positionX > 700)
+       {
+            this.corps[i].positionX = 0;
+       }
+
+       if(this.corps[i].positionX + 25 < 0 )
+       {
+        this.corps[i].positionX = 700;
+       }
+
+       if (this.teteSerpent.positionY > 700) {
+            this.teteSerpent.positionY = 0;
        }
        
-       if (this.changerDirect == true)
+       if(this.teteSerpent.positionY + 25 < 0 )
        {
-           this.gestionResteSerpent(this.ancienDirection,this.dernierPositionTeteSerpent);
+        this.teteSerpent.positionY = 700;
        }
+
 
         this.context.clearRect(0,0,this.gameWidth,this.gameHeight);
         this.dessiner(this.context, image);
@@ -187,20 +206,20 @@ export default class Serpent
 
 
     //Gestion du corps du serpent sans sa tete Olivier
-    gestionResteSerpent(ancienDirection,positionXY)
+    gestionResteSerpent(ancienDirection)
     {
         switch (ancienDirection) {
             // Ancien direction Gauche
             case 37:
                 for(let i = 1; i < this.corps.length; i++) 
                 {
-                    if (this.corps[i].positionX > positionXY[0]) 
+                    if (this.corps[i].positionX > this.corps[i].ancienPosition[0]) 
                     {}
                     else
                     {
                         if(this.corps[0].direction == 38)
                         {
-                            this.corps[i].positionX = positionXY[0];
+                            this.corps[i].positionX = this.corps[i].ancienPosition[0];
                             this.corps[i].positionY = this.corps[i-1].positionY + this.teteSerpent.longueurCote - 2;
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;
@@ -208,7 +227,7 @@ export default class Serpent
                         }
                         if (this.corps[0].direction == 40)
                         {
-                            this.corps[i].positionX = positionXY[0];
+                            this.corps[i].positionX = this.corps[i].ancienPosition[0];
                             this.corps[i].positionY = this.corps[i-1].positionY - this.teteSerpent.longueurCote + 2;
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;
@@ -236,20 +255,20 @@ export default class Serpent
             case 39:
                 for(let i = 1; i < this.corps.length; i++) 
                 {
-                    if (this.corps[i].positionX < positionXY[0]) 
+                    if (this.corps[i].positionX < this.corps[i].ancienPosition[0]) 
                     {}
                     else
                     {
                         if(this.corps[0].direction == 38) {
                             this.corps[i].positionY = this.corps[i-1].positionY + this.teteSerpent.longueurCote - 2;
-                            this.corps[i].positionX = positionXY[0];
+                            this.corps[i].positionX = this.corps[i].ancienPosition[0];
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;
                             this.corps[i].direction = this.corps[i-1].direction;
                         }
                         if(this.corps[0].direction == 40) {
                             this.corps[i].positionY = this.corps[i-1].positionY - this.teteSerpent.longueurCote + 2;
-                            this.corps[i].positionX = positionXY[0];
+                            this.corps[i].positionX = this.corps[i].ancienPosition[0];
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;
                             this.corps[i].direction = this.corps[i-1].direction;
@@ -271,12 +290,12 @@ export default class Serpent
                 console.log("Je suis entre dans gestionResteSerpent dir haut");
                 for(let i = 1; i < this.corps.length; i++) 
                 {
-                    if (this.corps[i].positionY > positionXY[1]) 
+                    if (this.corps[i].positionY > this.corps[i].ancienPosition[1]) 
                     {}
                     else
                     {
                         if(this.corps[0].direction == 37){
-                            this.corps[i].positionY = positionXY[1];
+                            this.corps[i].positionY = this.corps[i].ancienPosition[1];
                             this.corps[i].positionX = this.corps[i-1].positionX + this.teteSerpent.longueurCote - 2;
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;
@@ -284,7 +303,7 @@ export default class Serpent
                         }
                         if(this.corps[0].direction == 39)
                         {
-                            this.corps[i].positionY = positionXY[1];
+                            this.corps[i].positionY = this.corps[i].ancienPosition[1];
                             this.corps[i].positionX = this.corps[i-1].positionX - this.teteSerpent.longueurCote + 2;
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;
@@ -316,19 +335,19 @@ export default class Serpent
 
                 for(let i = 1; i < this.corps.length; i++) 
                 {
-                    if (this.corps[i].positionY < positionXY[1]) 
+                    if (this.corps[i].positionY < this.corps[i].ancienPosition[1]) 
                     {}
                     else
                     {
                         if (this.corps[0].direction == 37 ) {
-                            this.corps[i].positionY = positionXY[1];
+                            this.corps[i].positionY = this.corps[i].ancienPosition[1];
                             this.corps[i].positionX = this.corps[i-1].positionX + this.teteSerpent.longueurCote - 2;
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;
                             this.corps[i].direction = this.corps[i-1].direction;
                         }
                         if (this.corps[0].direction == 39) {
-                            this.corps[i].positionY = positionXY[1];
+                            this.corps[i].positionY = this.corps[i].ancienPosition[1];
                             this.corps[i].positionX = this.corps[i-1].positionX - this.teteSerpent.longueurCote + 2;
                             this.corps[i].vitesseX = this.corps[i-1].vitesseX;
                             this.corps[i].vitesseY = this.corps[i-1].vitesseY;

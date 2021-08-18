@@ -4,14 +4,17 @@ export default class EntreeClavier
     constructor(serpent) 
     {
         document.addEventListener("keydown", function(){
-            //alert(event.keyCode);
+            alert(event.keyCode);
             switch(event.keyCode) {
                 //Gauche
               case 37:
 
                 // essaie Dave 
-                serpent.dernierPositionTeteSerpent = [serpent.corps[0].positionX,serpent.corps[0].positionY];
-                serpent.ancienDirection = serpent.corps[0].direction;
+                for (let i = 1; i < serpent.corps.length; i++) {
+                    serpent.corps[i].ancienPosition = [serpent.corps[i-1].positionX,serpent.corps[i-1].positionY];
+                    serpent.corps[i].ancienDirection = serpent.corps[i-1].direction;
+                }
+                
                 //fin essai Dave 
 
                 serpent.corps[0].vitesseX = -2;
@@ -26,15 +29,19 @@ export default class EntreeClavier
                 //console.log("droite");
 
                 // essaie Dave 
-              // essaie Dave 
-                // essaie Dave 
-                 var ancienXYTete = [serpent.corps[0].positionX,serpent.corps[0].positionY];
+                   //var ancienXYTete = [serpent.corps[0].positionX,serpent.corps[0].positionY];
                 // var ancienDir = serpent.corps[0].direction;
                 //fin essai Dave 
+
             //fin essai Dave 
                 //fin essai Dave 
-                serpent.dernierPositionTeteSerpent = ancienXYTete;
-                serpent.ancienDirection = serpent.corps[0].direction;
+                // serpent.dernierPositionTeteSerpent = ancienXYTete;
+                // serpent.ancienDirection = serpent.corps[0].direction;
+                for (let i = 1; i < serpent.corps.length; i++) {
+                    serpent.corps[i].ancienPosition = [serpent.corps[i-1].positionX,serpent.corps[i-1].positionY];
+                    serpent.corps[i].ancienDirection = serpent.corps[i-1].direction;
+                }
+
 
                 serpent.corps[0].vitesseX = 2;
                 serpent.corps[0].vitesseY = 0;
@@ -51,13 +58,17 @@ export default class EntreeClavier
                 // essaie Dave 
                               // essaie Dave 
                 // essaie Dave 
-                var ancienXYTete = [serpent.corps[0].positionX,serpent.corps[0].positionY];
+                //var ancienXYTete = [serpent.corps[0].positionX,serpent.corps[0].positionY];
                 //var ancienDir = serpent.corps[0].direction;
                 //fin essai Dave 
                             //fin essai Dave 
                 //fin essai Dave 
-                serpent.dernierPositionTeteSerpent = ancienXYTete;
-                serpent.ancienDirection = serpent.corps[0].direction;
+                // serpent.dernierPositionTeteSerpent = ancienXYTete;
+                // serpent.ancienDirection = serpent.corps[0].direction;
+                for (let i = 1; i < serpent.corps.length; i++) {
+                    serpent.corps[i].ancienPosition = [serpent.corps[i-1].positionX,serpent.corps[i-1].positionY];
+                    serpent.corps[i].ancienDirection = serpent.corps[i-1].direction;
+                }
 
                 serpent.corps[0].vitesseX = 0;
                 serpent.corps[0].vitesseY= -2;
@@ -72,14 +83,17 @@ export default class EntreeClavier
                 // essaie Dave 
                               // essaie Dave 
                 // essaie Dave 
-                var ancienXYTete = [serpent.corps[0].positionX,serpent.corps[0].positionY];
+                //var ancienXYTete = [serpent.corps[0].positionX,serpent.corps[0].positionY];
                 //var ancienDir = serpent.corps[0].direction;
                 //fin essai Dave 
                             //fin essai Dave 
                 //fin essai Dave 
-                serpent.dernierPositionTeteSerpent = ancienXYTete;
-                serpent.ancienDirection = serpent.corps[0].direction;
-
+                // serpent.dernierPositionTeteSerpent = ancienXYTete;
+                // serpent.ancienDirection = serpent.corps[0].direction;
+                for (let i = 1; i < serpent.corps.length; i++) {
+                    serpent.corps[i].ancienPosition = [serpent.corps[i-1].positionX,serpent.corps[i-1].positionY];
+                    serpent.corps[i].ancienDirection = serpent.corps[i-1].direction;
+                }
                 serpent.corps[0].vitesseX = 0;
                 serpent.corps[0].vitesseY = 2;
                 serpent.corps[0].direction = 40;
