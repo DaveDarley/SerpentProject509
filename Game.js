@@ -1,3 +1,4 @@
+
 import EntreeUser from "./EntreeUser.js";
 import obsSansColli from "./obstacleCadreSansCollision.js";
 import { animationObstacleSansColli , animation} from "./animation.js";
@@ -98,6 +99,8 @@ export default class Game
         }else{
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
         }
+
+        // source: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         timeStamp = Date.now();
         window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) );
     }
