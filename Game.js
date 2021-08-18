@@ -1,63 +1,129 @@
-import EntreeClavier from "./EntreeClavier.js";
+
+import EntreeUser from "./EntreeUser.js";
+import obsSansColli from "./obstacleCadreSansCollision.js";
+import { animationObstacleSansColli , animation} from "./animation.js";
 
 export default class Game
 {
-    constructor(canvas, context, serpent, gameWidth,gameHeight/*, nourriture, obstacle*/)
+    constructor(canvas, layout, serpent, gameWidth,gameHeight,  imgObs ,imgFood, imgObsSansColli, imgSerp)
     {
         this.canvas = canvas;
-        this.context = context;
+        this.layout = layout;
         this.serpent = serpent;
         this.gameWidth = gameWidth;
         this.gameHeight =gameHeight;
+        this.imgObs = this.gameInitialise(imgObs,0);
+        this.imgFood = this.gameInitialise(imgFood,0);
+        this.imgObsSansColli = this.gameInitialise(imgObsSansColli,0);
+        this.imgSerp = this.gameInitialise(imgSerp,1);
+        this.state = "";
+    }
+    
+
+        /**Initialiser le jeu en telechargeant les images */
+        /*
+        Function pour load tous les images de nourriture avant d'appeler requestAnimationFrame()
+        https://gist.github.com/pixelhandler/1081922/d0b9fd3ca92d84947a6c834066da9c90d3d4c82b
+        */
+        gameInitialise(tabImagesAload,initSerpEtClavier)
+    {
+        if(initSerpEtClavier == 1){
+            var img1 = new Image();
+            img1.addEventListener('load', function(){
+            });
+            img1.src = tabImagesAload;
+            return img1;
+        }else{
+            for(var i = 0; i<tabImagesAload.length; i++){
+                var img1 = new Image();
+                img1.addEventListener('load', function(){
+                });
+                img1.src = tabImagesAload[i];
+                tabImagesAload[i] = img1;
+            }
+            return tabImagesAload;
+        }
     }
 
-    /**Initialiser le jeu en telechargeant les images */
-    gameInitialise()
-    {
-        new EntreeClavier(this.serpent);
-        var img1 = new Image();
-        // attendre pour que l'image soit load 
-        img1.addEventListener('load', function(){
-        });
-        img1.src = "R.png";
-        return img1;
-    }
+    gameStart(){
 
-    //Fonction mettant a jour le jeu 
-    gameloop(image)
-    {
-        this.serpent.mettreAJourSerpent(image);
-        if (this.serpent.teteSerpent.positionX < 650 || this.serpent.teteSerpent.positionY < 650){
-        window.requestAnimationFrame(()=>this.gameloop(image));}
-    }
+        var colliOuPas;
+        var nourritureSurLeCanvas = [];
+        var obsSurLeCanvas = [];
+        var posObsCadreSansColli;
+        var mesObs;
+        this.state = "Running";
 
-    /**Fonction permettant de demarrer le jeu */
-    gameStart(image)
-    {
-        this.serpent.corps[0].vitesseX = 0;
-        this.serpent.corps[0].vitesseY = 0;
-        this.gameloop(image);
+        if(document.getElementById('sansColli')){
+            this.canvas = document.getElementById("sansColli");
+            this.layout = this.canvas.getContext("2d"); 
+            colliOuPas = 2;
+        }else{
+          this.canvas = document.getElementById("avecColli");
+          this.layout = this.canvas.getContext("2d"); 
+          colliOuPas = 1;
+        }
+      
+        // Comme c'est une classe , je suis oblige de creer une instance
+        // mais elle n'est pas vraiment necessaire encore!!
+        let obs = new obsSansColli(0,0,0,0,0);
+    
+        // la g les positions ou je peux placer mes differents obstacle
+        posObsCadreSansColli = obs.placeObstacleSansCollision(this.imgObsSansColli,[],0);
+        mesObs = animationObstacleSansColli(posObsCadreSansColli,this.imgObsSansColli);
         
-        //context.clearRect(0,0,this.gameWidth,this.gameHeight);
+        console.log("Mon tableau de Position:"+posObsCadreSansColli);
+    
+        this.gameLoop(this.layout,nourritureSurLeCanvas,this.imgFood,obsSurLeCanvas,this.imgObs,colliOuPas,posObsCadreSansColli,this.imgObsSansColli,mesObs,this.serpent,this.imgSerp,0);
     }
 
-    /**Fonction permettant de mettre  */
-    gamePause()
-    {
+    
+    gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp){
+        if(this.state == "pause"){
 
+            nourritureSurLeCanvas.forEach(function(food){
+                layout.drawImage(food.image,food.posX,food.posY,food.getGrosseurNourriture(),food.getGrosseurNourriture())
+            });
+            // Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
+            if(colliOuPas == 1){ 
+                obsSurLeCanvas.forEach(function(food){
+                    layout.drawImage(food.image,food.posX,food.posY,food.grosseur,food.grosseur)
+                });
+            }else{
+                mesObs.forEach(function(Obs){
+                    Obs.placerMonObstacle(layout);
+                });
+            }
+            this.serpent.dessiner(layout,this.imgSerp);
+      
+        }else{
+            animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
+        }
+
+        // source: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
+        timeStamp = Date.now();
+        window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) );
     }
 
-    /**Fonction permettant de redemarrer le jeu */
-    gameRestart()
-    {
-
+    gamePause(){
+        if(this.state == "pause"){
+          this.state = "Running";
+          document.getElementById("pause").innerHTML = "1) Pause";
+        }else{
+            this.state = "pause";
+            document.getElementById("pause").innerHTML = "1) Resume";
+        }
     }
 
-    /**Fonction permettant de mettre fin au jeu */
-    gameStop()
-    {
-
+    gameRestart(){
+        location.reload(); // reload ma page html
+        this.state = "Running";
     }
+
+    gameQuit(){
+        window.location.href='index.html';
+    }
+
 
 }
 

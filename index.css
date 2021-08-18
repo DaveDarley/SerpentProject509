@@ -1,19 +1,20 @@
+/*https://stackoverflow.com/questions/14073498/how-do-i-create-a-change-in-font-size-on-hover-without-realigning-other-text */
+
 .choixModeJeu:hover {
-  background-color: yellow;
+  font-size: 50px;
 }
 .choixModeJeu {
   text-align: center;
+  color:white;
   font-size: 160%;
   margin-top: 10px;
   margin-bottom: 10px;
+
+  line-height: 50px;
+  display: block;
 }
 .gameScreen {
-  border: 1px solid rgb(0, 0, 0);
-
-}
-
-#canvasAvecCollision{
-  border: 1px solid rgb(231, 15, 15);
+  border: 1px solid black;
 }
 
 .parent {
@@ -23,7 +24,7 @@
 .narrow {
   width: 700px;
   height: 700px;
-  border: 1px solid blue;
+  background-image: url("./images/backgroundCanvas.png")
 }
 .wide {
   flex: 1;
@@ -35,8 +36,34 @@
   width:70px;
   height:70px;
   border:1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .infosSurLaPartie {
   text-align:center;
+}
+
+.Page{
+  background-color: antiquewhite;
+  background-image: url(https://cdn.discordapp.com/attachments/820323441818992690/877233927729852436/Snake-Illustration-with-Transparent-Background-680x680.png);
+  
+}
+
+.Bienvenue{
+  color:white;
+  background-image: url(https://thumbs.dreamstime.com/z/vintage-background-frame-vintage-background-frame-design-paper-decoration-128717526.jpg);
+  height: fit-content;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid black;
+  border-radius: 150px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  
 }
