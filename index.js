@@ -1,17 +1,11 @@
 // Lien vers mes png : http://pngimg.com/images/nature/stone
 
-import Nourriture from "./nourriture.js";
-import ObsColli from "./obstacleCadreAvecCollision.js"
-import obsSansColli from "./obstacleCadreSansCollision.js"
-import Serpent from "./Serpent.js"
-import EntreeClavier from "./EntreeClavier.js"
-import { startGame } from "./pausePlayRestart.js"
 
-// check si on peut mettre import * .......
-import { animation } from "./animation.js"
-import { animationObstacleColli } from "./animation.js"
-import { animationObstacleSansColli } from "./animation.js"
-import { checkFoodOnCanvas } from "./animation.js"
+import Game from "./game.js";
+import EntreeUser from "./EntreeUser.js";
+import Serpent from "./Serpent.js"
+
+
 
 
 /*
@@ -48,102 +42,22 @@ var imageObstacle= [
   "./images/obstacle5.png"
 ]
 
+//Image utilise pour representer chaque case du serpent
+var imgSerp = "./images/R.png"; 
+var layout, canvas;
 
 
-/*
-L'entree du jeu
-*/
-function remplirCanvas(collisionOuPas){
+let serpent = new Serpent(700,700,"carre",layout);
+let game = new Game(canvas,layout,serpent,700,700,mesObstacles,mesNourritures,imageObstacle,imgSerp);
 
-  
-  var canvas;
-  var nourritureSurLeCanvas = [];
-  var obsSurLeCanvas = [];
-  var colliOuPas;
-  var layout;
-  var obsImageLoaded;
-  var obsImageSansColliLoaded;
-  var posObsCadreSansColli;
-  var mesObs;
+// Listenner pour la gestion des entrees de l'utilisateur
+new EntreeUser(serpent,game);
 
-  // Pour savoir dans quel canvas le joueur est entrain de jouer
-  if(collisionOuPas == 1){
-    canvas = document.getElementById("avecColli");
-    layout = canvas.getContext("2d"); 
-    colliOuPas = 1;
-    // Dans le cas du cadre avec collision , je load les images d'obstacles que j'aurai a utiliser
-    obsImageLoaded = loadImages(mesObstacles);
+// Ou on place le serpent au debut du jeu
+serpent.corps[0].PositionX = 0;
+serpent.corps[0].PositionY = 0;
 
-  }else{
-    canvas = document.getElementById("sansColli");
-    layout = canvas.getContext("2d"); 
+//Debut de la partie
+game.gameStart();
+serpent.layout = game.layout
 
-    // Je load les images que j'aurai a utiliser pour les obstacles pour le cadre sans collision
-    obsImageSansColliLoaded = loadImages(imageObstacle);
-
-    // un peu bete ici , mais la facon que je fais ma recursion dans placeObstacle...
-    // fais en sorte que le tableau d'images loaded passe en parametre ressort vide
-    var imgLoaded = loadImages(imageObstacle);
-
-     // Comme c'est une classe , je suis oblige de creer une instance
-    // mais elle n'est pas vraiment necessaire encore!!
-    let obs = new obsSansColli(0,0,0,0,0);
-
-    // la g les positions ou je peux placer mes differents obstacle
-    posObsCadreSansColli = obs.placeObstacleSansCollision(imgLoaded,[]);
-    mesObs = animationObstacleSansColli(posObsCadreSansColli,obsImageSansColliLoaded);
-    
-    console.log("Mon tableau de Position:"+posObsCadreSansColli);
-
-    colliOuPas = 2;
-  }
-  // Je load les images de nourritures avant de les dessiner (tant qu'avec collision ou sans collision)!!
-  var foodImageLoaded = loadImages(mesNourritures);
-
-
-  // Ajout Barreau
-  let serpent = new Serpent(700,700,"carre",layout);
-
-  let  A = new EntreeClavier(serpent);
-  var img1 = new Image();
-  // attendre pour que l'image soit load 
-  img1.addEventListener('load', function(){
-  });
-  img1.src = "./images/R.png";
-
- serpent.corps[0].PositionX = 0;
- serpent.corps[0].PositionY = 0;
-
- // Fin ajout barreau
-
-
-  
-
-  animation(layout,nourritureSurLeCanvas,foodImageLoaded,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,serpent,img1);
-}
-
-
-
-  
-/*
-  Function pour load tous les images de nourriture avant d'appeler requestAnimationFrame()
-  https://gist.github.com/pixelhandler/1081922/d0b9fd3ca92d84947a6c834066da9c90d3d4c82b
-*/
-function loadImages(tabImagesNonLoad){
-    var loadedImages = [];
-    for(var i = 0; i<tabImagesNonLoad.length; i++){
-      var img1 = new Image();
-      // attendre pour que l'image soit load 
-      img1.addEventListener('load', function(){
-      });
-      img1.src = tabImagesNonLoad[i];
-      loadedImages.push(img1);
-    }
-    return loadedImages;
-}
-
-
-
-
-// Appel de fonction qui commence tout 
-remplirCanvas(startGame());

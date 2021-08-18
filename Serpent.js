@@ -24,6 +24,7 @@ export default class Serpent
         return this.corps[0].renvoiePosition();
     }
 
+    //Fonction permettant de mettre a jour les position du corps du serpent
     mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect){
 
         this.gestionMouvementSerpent(1,ancienTeteX,ancienTeteY,ancienDirect);
@@ -40,13 +41,13 @@ export default class Serpent
 
     }
 
-    // recursion plus facile ici
+    // Fonction permettant de gerer le repositionnnement du reste du corps du sereptn en focntion de la direction prise par la tete
     gestionMouvementSerpent(i,ancienX,ancienY,ancienDirection){
 
         if(this.corps.length > 1){ // si c'est juste la tete , c pas necessaire de gerer le mouvement du serpent
 
-            console.log(this.corps.length);
-            console.log(this.corps[i].positionX);
+            //console.log(this.corps.length);
+            //console.log(this.corps[i].positionX);
             //debugger;
 
             if(i == this.corps.length){
@@ -68,6 +69,7 @@ export default class Serpent
 
     }
 
+    //Fonction permettant d'agrandir la taille du serpent
     agrandirSerpent(){
         var madirection = this.corps[this.corps.length - 1].direction;
         let allongement = new Forme(this.teteSerpent.formeSerp,25);
@@ -79,28 +81,24 @@ export default class Serpent
                 allongement.positionX = this.corps[position].positionX + this.teteSerpent.longueurCote + 2;
                 allongement.positionY = this.corps[position].positionY;
                 allongement.direction = this.corps[position].direction;
-                this.corps.push(allongement);
                 break;
             case 39:
                 allongement.positionX = this.corps[position].positionX  - this.teteSerpent.longueurCote - 2;
                 allongement.positionY = this.corps[position].positionY;
                 allongement.direction = this.corps[position].direction;
-                this.corps.push(allongement);
                 break;
             case 38:
                 allongement.positionX = this.corps[position].positionX  ;
                 allongement.positionY = this.corps[position].positionY + this.teteSerpent.longueurCote + 2;
                 allongement.direction = this.corps[position].direction;
-                this.corps.push(allongement);
                 break;
             case 40:
                 allongement.positionX = this.corps[position].positionX ;
                 allongement.positionY = this.corps[position].positionY - this.teteSerpent.longueurCote - 2;
                 allongement.direction = this.corps[position].direction;
-                this.corps.push(allongement);
                 break;
-
         }
+        this.corps.push(allongement);
     }
 
     //Fonction renvoyant les points gagnes 
@@ -110,55 +108,51 @@ export default class Serpent
     }
 
     // Si utilisateur presse rien ,le serpent suit la direction de la tete
-  /*  bougerSansUser(layout,formeSerp){
+    // Doit aussi gerer la vitesse du serpent
+    //Fonction permettant d'avancer le serpent sams entrees de l'uitlisateur
+   bougerSansUser(){
         var serpent = this;
         var directTeteSerpent = this.corps[0].direction;
+        var ancienTeteX ;
+        var ancienTeteY ;
+        var ancienDirect ;
         switch(directTeteSerpent) {
             //Gauche
           case 37:
-            var ancienTeteX = serpent.corps[0].positionX ;
-            var ancienTeteY = serpent.corps[0].positionY ;
-            var ancienDirect = serpent.corps[0].direction;
-            serpent.corps[0].positionX = serpent.corps[0].positionX  -  serpent.corps[0].longueurCote -  2;
+              console.log("je vais a gauche");
+            ancienTeteX = serpent.corps[0].positionX ;
+            ancienTeteY = serpent.corps[0].positionY ;
+            ancienDirect = serpent.corps[0].direction;
+            serpent.corps[0].positionX = serpent.corps[0].positionX  - serpent.corps[0].longueurCote ;
             serpent.corps[0].direction = 37;
-            serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect)
         break;
             //Droite
         case 39:
-            var ancienTeteX = serpent.corps[0].positionX ;
-            var ancienTeteY = serpent.corps[0].positionY ;
-            var ancienDirect = serpent.corps[0].direction;
-            serpent.corps[0].positionX = serpent.corps[0].positionX  +  serpent.corps[0].longueurCote +  2;
+            ancienTeteX = serpent.corps[0].positionX ;
+            ancienTeteY = serpent.corps[0].positionY ;
+            ancienDirect = serpent.corps[0].direction;
+            serpent.corps[0].positionX = serpent.corps[0].positionX  + serpent.corps[0].longueurCote ;
             serpent.corps[0].direction = 39;
-            serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect)
         break;
             //Haut
         case 38:
-            var ancienTeteX = serpent.corps[0].positionX ;
-            var ancienTeteY = serpent.corps[0].positionY ;
-            var ancienDirect = serpent.corps[0].direction;
-            serpent.corps[0].positionY = serpent.corps[0].positionY  -  serpent.corps[0].longueurCote -  2;
+            ancienTeteX = serpent.corps[0].positionX ;
+            ancienTeteY = serpent.corps[0].positionY ;
+            ancienDirect = serpent.corps[0].direction;
+            serpent.corps[0].positionY = serpent.corps[0].positionY  - serpent.corps[0].longueurCote ;
             serpent.corps[0].direction = 38;
-            serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect)
         break;
             //Bas
         case 40:
-            var ancienTeteX = serpent.corps[0].positionX ;
-            var ancienTeteY = serpent.corps[0].positionY ;
-            var ancienDirect = serpent.corps[0].direction;
-            serpent.corps[0].positionY = serpent.corps[0].positionY  +  serpent.corps[0].longueurCote +  2;
+            ancienTeteX = serpent.corps[0].positionX ;
+            ancienTeteY = serpent.corps[0].positionY ;
+            ancienDirect = serpent.corps[0].direction;
+            serpent.corps[0].positionY = serpent.corps[0].positionY  + serpent.corps[0].longueurCote;
             serpent.corps[0].direction = 40;
-            serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect)
         break;
-
-        case 65:
-            serpent.agrandirSerpent()
-            break
         }
-    
-        this.dessiner(layout,formeSerp);
-
-    }*/
+        serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect);
+    }
 
 
 }

@@ -14,9 +14,10 @@ export default class obstacleSansCollision {
         Dans le cadre du cadre sans collisions , cette fonction renvoie 
         la position(un tableau doucle [[x,y]]) a laquelle devrait etre place les obstacles sur le canvas
     */
-    placeObstacleSansCollision(tabImages,mesPositions){
+    placeObstacleSansCollision(tabImages,mesPositions,index){
 
-        if(tabImages.length == 0){
+        var newIndex = index+1;
+        if(tabImages.length == index){
             console.log("Mon tableau est: "+ mesPositions);
             return mesPositions;
         }else{
@@ -27,20 +28,21 @@ export default class obstacleSansCollision {
                 var newTab = [];
                 newTab.push(xPosition);newTab.push(yPosition);
                 mesPositions.push(newTab);
-                tabImages.pop();
-                return this.placeObstacleSansCollision(tabImages,mesPositions);
+                //tabImages.pop(); 
+               // i = i + 1;
+                return this.placeObstacleSansCollision(tabImages,mesPositions,newIndex);
             }else{
                 for(var i = 0; i<mesPositions.length; i++){
                     if(mesPositions[i][0] == xPosition && mesPositions[i][1] == yPosition){
-                        return this.placeObstacleSansCollision(tabImages,mesPositions);
+                        return this.placeObstacleSansCollision(tabImages,mesPositions,index);
                     }
                 }
                 // Si j'arrive ici c qu'il n'y a pas deja un x ou y a la position choisit par l'obstacle
                 var newTab = [];
                 newTab.push(xPosition);newTab.push(yPosition);
                 mesPositions.push(newTab);
-                tabImages.pop();
-                return this.placeObstacleSansCollision(tabImages,mesPositions);
+                //tabImages.pop();
+                return this.placeObstacleSansCollision(tabImages,mesPositions,newIndex);
             }
         }
     }

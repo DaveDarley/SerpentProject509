@@ -1,8 +1,10 @@
 
-export default class EntreeClavier
+
+export default class EntreeUser
 {
-    constructor(serpent,image) 
+    constructor(serpent,game) 
     {
+        //Listener gerant les entrees claviers de l'utilisateur
         document.addEventListener("keydown", function(){
             //alert(event.keyCode);
             switch(event.keyCode) {
@@ -49,7 +51,19 @@ export default class EntreeClavier
             }
         });
 
+        //Ecouteur gerant l'etat Pause du jeu
+        document.getElementById('pause').addEventListener('click',function(){
+            game.gamePause();
+        });
+
+        //Ecouteur gerant la fonction "Quitter" de la partie
+        document.getElementById('quit').addEventListener('click',function(){
+            game.gameQuit();
+        });
+
+        //Ecouteur gerant la fonction "Restart" de la partie
+        document.getElementById('restart').addEventListener('click',function(){
+            game.gameRestart();
+        });
     }
-
-
 }
