@@ -23,7 +23,7 @@ import obsSansColli from "./obstacleCadreSansCollision.js"
 
 var Pause , Restart , Quit = false ;
 
-export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs){
+export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp){
 
     layout.clearRect(0,0,700,700);
 
@@ -67,6 +67,7 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
         nourritureSurLeCanvas.push(maNourriture);
         }
         nourritureSurLeCanvas.forEach(function(food){
+            
         food.deplacementNourriture(layout);
         });
     
@@ -78,6 +79,8 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
             Obs.placerMonObstacle(layout);
             });
         }
+
+        monserpent.dessiner(layout,formeSerp);
 
     }else{
 
@@ -98,7 +101,7 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
 
     }
     
-   requestAnimationFrame(function() {animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs)});
+   requestAnimationFrame(function() {animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp)});
 }
 
 /*

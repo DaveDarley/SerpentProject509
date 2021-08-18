@@ -3,6 +3,8 @@
 import Nourriture from "./nourriture.js";
 import ObsColli from "./obstacleCadreAvecCollision.js"
 import obsSansColli from "./obstacleCadreSansCollision.js"
+import Serpent from "./Serpent.js"
+import EntreeClavier from "./EntreeClavier.js"
 import { startGame } from "./pausePlayRestart.js"
 
 // check si on peut mettre import * .......
@@ -98,9 +100,26 @@ function remplirCanvas(collisionOuPas){
   // Je load les images de nourritures avant de les dessiner (tant qu'avec collision ou sans collision)!!
   var foodImageLoaded = loadImages(mesNourritures);
 
+
+  // Ajout Barreau
+  let serpent = new Serpent(700,700,"carre",layout);
+
+  let  A = new EntreeClavier(serpent);
+  var img1 = new Image();
+  // attendre pour que l'image soit load 
+  img1.addEventListener('load', function(){
+  });
+  img1.src = "./images/R.png";
+
+ serpent.corps[0].PositionX = 0;
+ serpent.corps[0].PositionY = 0;
+
+ // Fin ajout barreau
+
+
   
 
-  animation(layout,nourritureSurLeCanvas,foodImageLoaded,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs);
+  animation(layout,nourritureSurLeCanvas,foodImageLoaded,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,serpent,img1);
 }
 
 
