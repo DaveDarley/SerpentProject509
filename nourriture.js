@@ -2,11 +2,10 @@
 
  export default class Nourriture {
 
-constructor(image,ptsDeVie,height,width,posX,posY,vitesse,direction,isOnCanvas){
+constructor(image,ptsDeVie,grosseur,posX,posY,vitesse,direction,isOnCanvas){
   this.image = image;  // l'image qui represente la nourriture
   this.ptsDeVie = ptsDeVie; // le pts de vie que represente cette nourriture
-  this.height = height;
-  this.width = width;
+  this.grosseur = grosseur;
   this.posX = posX;
   this.posY = posY;
   this.vitesse = vitesse;
@@ -37,7 +36,7 @@ frame(layout,id){
 
       case 0:
 
-      console.log("deplacement 0");
+      //console.log("deplacement 0");
       layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
       this.posX = this.posX - 0.4;
       this.posY = this.posY - 0.4;
@@ -47,46 +46,46 @@ frame(layout,id){
       break;
 
       case 1:
-        console.log("deplacement vers 1");
+        //console.log("deplacement vers 1");
         layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
         this.posY = this.posY - 0.4;
       break;
 
       case 2:
-        console.log("deplacement vers 2");
+        //console.log("deplacement vers 2");
         layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
         this.posX = this.posX + 0.4;
         this.posY = this.posY - 0.4;
       break;
 
       case 3:
-        console.log("deplacement vers 3");
+       // console.log("deplacement vers 3");
         layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
         this.posX = this.posX + 0.4;
       break;
 
       case 4:
-        console.log("deplacement vers 4");
+        // console.log("deplacement vers 4");
         layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
         this.posX = this.posX + 0.4;
         this.posY = this.posY + 0.4;
       break;
 
       case 5:
-        console.log("deplacement vers 5");
+       //  console.log("deplacement vers 5");
         layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
         this.posY = this.posY + 0.4;
       break;
 
       case 6:
-        console.log("deplacement vers 6");
+       //  console.log("deplacement vers 6");
         layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
         this.posX = this.posX - 0.4;
         this.posY = this.posY + 0.4;
       break;
 
       case 7:
-        console.log("deplacement vers 7");
+       //  console.log("deplacement vers 7");
         layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
         this.posX = this.posX - 0.4;
       break;
@@ -126,7 +125,7 @@ getY(){
   return this.posY;
 }
 getGrosseurNourriture(){
-  return this.height;
+  return this.grosseur;
 }
 
 
