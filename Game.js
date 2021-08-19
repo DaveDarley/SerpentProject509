@@ -96,10 +96,11 @@ export default class Game
                 });
             }
             this.serpent.dessiner(layout,this.imgSerp);
-      
+            
         }else{
             // quoi faire qd la tete du serpent entre en collision avec une nourriture;
             nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
+            var collisionSerpent = colliSerpObs(/*tabObst,*/this.serpent,colliOuPas);
 
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
         }

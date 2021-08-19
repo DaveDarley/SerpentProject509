@@ -64,17 +64,48 @@ export function colliSerpFood(tabFood,serpent){
 // Un peu toff
 // Gerer non seulement avec tete serpent mais aussi avec corps serpent
 // on a pas encore gerer les collisions entre obstacles , et serpent (on doit le faire dans cette fonction )
-export function colliSerpObs(tabFood,serpent){
+export function colliSerpObs(tabObst,serpent){
     var teteSerpent = serpent.corps[0];
     var xTeteSerp = teteSerpent.positionX;
     var yteteSerp = teteSerpent.positionY;
+    var collision = false;
     var grosseurCoteSerp = teteSerpent.longueurCote
 
     
-
-    tabFood.forEach(function(food){
-
+    //Pour chaque obstabcle
+    tabObst.forEach(function(obst){
         // cote gauche
+        //Pour chaque partie du corps du serpent
+        serpent.corps.forEach(function(partieCorps)
+        {
+            switch (obst.direction) {
+                //Mur Nord
+                case 0:
+                    if ( (partieCorps.positionX == Obst.posX) || partieCorps.positionY == Obst.posY)
+                    return true;
+                    break;
+                
+                //Mur Est
+                case 1:
+
+                    break;
+
+                //Mur Sud
+                case 2:
+
+                    break;
+            
+                //Mur Ouest
+                case 3:
+
+                    break;
+            }
+            
+            if ( (partieCorps.positionX == Obst.posX) || partieCorps.positionY == Obst.posY)
+            return true;
+        })
+
+        
         if(xTeteSerp + grosseurCoteSerp == food.posX && yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur){
           
           foodOrObs.isOnCanvas = false;

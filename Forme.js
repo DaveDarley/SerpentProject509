@@ -22,4 +22,18 @@ export default class Forme
         return [this.positionX,this.positionY];
     }
 
+    //Focntion gerant les collisions
+    collision(teteSerpent, tabObst)
+    {
+        if (teteSerpent.positionX <= this.positionX <= teteSerpent.positionX && teteSerpent.positionY == this.positionY)
+        {
+            console.log("Vous avez perdu !");
+        }
+
+        if()
+        {
+
+        }
+    }
+
 }
