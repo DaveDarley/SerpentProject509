@@ -58,3 +58,50 @@
   margin-right: 50px;
   
 }
+
+.regles{
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.instruction{
+
+  background-color: rgba (0,0,0,0.8);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+ 
+}
+
+.instruction .instruction--cache{
+  display: none;
+}
+
+.instruction .lesInstructions{
+
+    background-color: aliceblue;
+    padding: 2rem 4rem;
+
+
+  }
+.instruction.FermerInstruction{
+
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -2rem;
+  margin-top: -1rem;
+  cursor: pointer;
+}
+
