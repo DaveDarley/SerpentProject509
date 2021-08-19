@@ -14,8 +14,8 @@
 // qd la tete de la tete du serpent est largement superieur a la nourriture
 // Voir demain avec barreau et bitho
 
+//Si trop grand, il faut reduire
 
-// If trop grand , faut les reduire
 export function colliSerpFood(tabFood,serpent){
     var teteSerpent = serpent.corps[0];
     var xTeteSerp = teteSerpent.positionX;
@@ -66,14 +66,13 @@ export function colliSerpFood(tabFood,serpent){
 // Un peu toff
 // Gerer non seulement avec tete serpent mais aussi avec corps serpent
 // on a pas encore gerer les collisions entre obstacles , et serpent (on doit le faire dans cette fonction )
-export function colliSerpObs(tabObst,serpent){
+export function colliSerpObs(/*tabObst,*/serpent/*,colliOuPas*/){
     var teteSerpent = serpent.corps[0];
-    var xTeteSerp = teteSerpent.positionX;
-    var yteteSerp = teteSerpent.positionY;
     var collision = false;
-    var grosseurCoteSerp = teteSerpent.longueurCote
 
-    
+    var grosseurCoteSerp = teteSerpent.longueurCote;
+
+    /*
     //Pour chaque obstabcle
     tabObst.forEach(function(obst){
         // cote gauche
@@ -131,4 +130,16 @@ export function colliSerpObs(tabObst,serpent){
 
     });
     return tabFood;
+    */
+
+
+    //Gestion collision avec le corps du serpent
+    serpent.corps.forEach(function(partieCorps)
+    {
+        if (partieCorps.collision(serpent) == true)
+        {
+            collision = true;
+        }
+    });
+    return collision; 
 }

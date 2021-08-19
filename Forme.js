@@ -23,16 +23,14 @@ export default class Forme
     }
 
     //Focntion gerant les collisions
-    collision(teteSerpent, tabObst)
+    collision(serpent/*, tabObst*/)
     {
-        if (teteSerpent.positionX <= this.positionX <= teteSerpent.positionX && teteSerpent.positionY == this.positionY)
-        {
-            console.log("Vous avez perdu !");
-        }
-
-        if()
-        {
-
+        if (serpent.corps.length > 1){
+            if ((serpent.teteSerpent.positionX <= this.positionX <= serpent.teteSerpent.positionX) && serpent.teteSerpent.positionY == this.positionY)
+            {
+                console.log("Collision");
+                return true;
+            }
         }
     }
 
