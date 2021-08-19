@@ -25,7 +25,7 @@ var last = 0;
 
 export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp){
 
-    layout.clearRect(0,0,700,700);
+   // layout.clearRect(0,0,700,700);
     // tout nourriture qui excede les limites du canvas est enleve de la liste de nourriture a dessiner
     if(nourritureSurLeCanvas.length != 0){
     nourritureSurLeCanvas = checkFoodOnCanvas(nourritureSurLeCanvas);
@@ -97,7 +97,7 @@ export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
         case 0:  // Mur Nord
           document.getElementById("obsFromWhere").innerHTML = "NORD";
           posX = (Math.floor(Math.random() *8) * 100) ; 
-          posY = 0 ;
+          posY = 0 - grosseur;  // pour avoir une entree de l'image smooth sur le canvas 
           break;
         case 1: // Mur Est
           document.getElementById("obsFromWhere").innerHTML = "EST";
@@ -111,7 +111,7 @@ export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
           break;
         case 3: // Mur ouest
           document.getElementById("obsFromWhere").innerHTML = "OUEST";
-          posX = 0 ; 
+          posX = 0 - grosseur; 
           posY = (Math.floor(Math.random() *8) * 100) ;
           break;
       }

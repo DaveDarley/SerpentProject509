@@ -1,5 +1,5 @@
 // Lien vers mes png : http://pngimg.com/images/nature/stone
-
+// play et stop un requestanimationFrame : https://stackoverflow.com/questions/10735922/how-to-stop-a-requestanimationframe-recursion-loop
 
 import Game from "./game.js";
 import EntreeUser from "./EntreeUser.js";

@@ -14,6 +14,8 @@
 // qd la tete de la tete du serpent est largement superieur a la nourriture
 // Voir demain avec barreau et bitho
 
+
+// If trop grand , faut les reduire
 export function colliSerpFood(tabFood,serpent){
     var teteSerpent = serpent.corps[0];
     var xTeteSerp = teteSerpent.positionX;
