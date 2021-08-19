@@ -47,7 +47,16 @@ export default class EntreeUser
 
             case 65:
                 serpent.agrandirSerpent()
-                break
+            break;
+
+            case 32:
+                game.gamePause();
+            break;
+
+            case 27:
+                game.gameQuit();
+            break;
+
             }
         });
 

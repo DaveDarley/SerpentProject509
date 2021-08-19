@@ -119,7 +119,6 @@ export default class Serpent
         switch(directTeteSerpent) {
             //Gauche
           case 37:
-              console.log("je vais a gauche");
             ancienTeteX = serpent.corps[0].positionX ;
             ancienTeteY = serpent.corps[0].positionY ;
             ancienDirect = serpent.corps[0].direction;

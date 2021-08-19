@@ -44,7 +44,7 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
     var nourriture = Math.floor(Math.random() *7) ; // pour savoir quelle image afficher
     var ptsDeVie = Math.floor(Math.random() *9) + 1; 
 
-    let maNourriture = new Nourriture(lesNourritures[nourriture],ptsDeVie,grosseur,grosseur,xDepart,yDepart,vitesse,direction,false);
+    let maNourriture = new Nourriture(lesNourritures[nourriture],ptsDeVie,grosseur,xDepart,yDepart,vitesse,direction,false);
     nourritureSurLeCanvas.push(maNourriture);
     }
 
@@ -63,10 +63,8 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
 
 
     let timeInSecond = timeStamp / 1000;
-    console.log(timeInSecond);
 
     if (timeInSecond - last >= 0.1) {
-        console.log("j'utilise timestamp");
       last = timeInSecond;
       monserpent.bougerSansUser(layout,formeSerp);
     }
@@ -88,7 +86,7 @@ export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
     }
   
     // Des qu'on a moins de 2 objets sur le canvas , on en cree un autre
-    if(obsSurLeCanvas.length < 2){
+    if(obsSurLeCanvas.length < 2){  
       var whichDirection = Math.floor(Math.random() *4); // 4 murs d'ou peuvent sortir les obstacles
       var posX; var posY;
       var grosseur = (Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px

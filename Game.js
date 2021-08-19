@@ -2,6 +2,7 @@
 import EntreeUser from "./EntreeUser.js";
 import obsSansColli from "./obstacleCadreSansCollision.js";
 import { animationObstacleSansColli , animation} from "./animation.js";
+import { colliSerpFood } from "./GestionCollision.js";
 
 export default class Game
 {
@@ -97,6 +98,9 @@ export default class Game
             this.serpent.dessiner(layout,this.imgSerp);
       
         }else{
+            // quoi faire qd la tete du serpent entre en collision avec une nourriture;
+            nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
+
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
         }
 
@@ -104,6 +108,9 @@ export default class Game
         timeStamp = Date.now();
         window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) );
     }
+
+
+
 
     gamePause(){
         if(this.state == "pause"){
@@ -116,7 +123,7 @@ export default class Game
     }
 
     gameRestart(){
-        location.reload(); // reload ma page html
+        location.reload(); 
         this.state = "Running";
     }
 
