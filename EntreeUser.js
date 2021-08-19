@@ -6,6 +6,7 @@ export default class EntreeUser
     {
         //Listener gerant les entrees claviers de l'utilisateur
         document.addEventListener("keydown", function(){
+            
             switch(event.keyCode) {
                 //Gauche
             

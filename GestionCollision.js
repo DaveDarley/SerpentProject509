@@ -27,7 +27,7 @@ export function colliSerpFood(tabFood,serpent){
     tabFood.forEach(function(food){
 
         // sort de la gauche vers la droite 
-       if(teteSerpent.direction == 39 && xTeteSerp + grosseurCoteSerp >= food.posX && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) )){
+       /*if(teteSerpent.direction == 39 && xTeteSerp + grosseurCoteSerp >= food.posX && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) )){
           ptsToAdd += food.ptsDeVie;
           food.isOnCanvas = false;
           serpent.agrandirSerpent();
@@ -38,10 +38,10 @@ export function colliSerpFood(tabFood,serpent){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
-        }
+        }*/
 
         // sort du haut vers le bas
-        if(teteSerpent.direction == 40 && yteteSerp + grosseurCoteSerp >= food.posY && ((xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur)) ){
+        if(teteSerpent.direction == 40 && yteteSerp + grosseurCoteSerp >= food.posY && ((xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur) || (food.posX >= xTeteSerp  && food.posX + food.grosseur <= xTeteSerp + grosseurCoteSerp)  ) ){
 
             console.log(teteSerpent.direction);
             console.log(yteteSerp + grosseurCoteSerp );
@@ -51,53 +51,31 @@ export function colliSerpFood(tabFood,serpent){
             serpent.agrandirSerpent(); 
         }
 
-        // sort du bas vers le haut
+       /* // sort du bas vers le haut
         if(teteSerpent.direction == 38 && yteteSerp <= food.posY + food.grosseur && ( (xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur) )){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
-        }
+        }*/
     });
     document.getElementById("ptsDeVie").innerHTML = ptsToAdd;
     return tabFood;
 }
 
 
-// Un peu toff
-// Gerer non seulement avec tete serpent mais aussi avec corps serpent
-// on a pas encore gerer les collisions entre obstacles , et serpent (on doit le faire dans cette fonction )
-export function colliSerpObs(tabFood,serpent){
-    var teteSerpent = serpent.corps[0];
-    var xTeteSerp = teteSerpent.positionX;
-    var yteteSerp = teteSerpent.positionY;
-    var grosseurCoteSerp = teteSerpent.longueurCote
-
-    
-
-    tabFood.forEach(function(food){
-
-        // cote gauche
-        if(xTeteSerp + grosseurCoteSerp == food.posX && yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur){
-          
-          foodOrObs.isOnCanvas = false;
-        }
-
-        // cote droit
-        if(xTeteSerp  == food.posX + food.grosseur && yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur){
-            foodOrObs.isOnCanvas = false;
-        }
-
-        // cote haut
-        if(food.posY == yteteSerp + grosseurCoteSerp && xTeteSerp >= food.posX  && xTeteSerp <= food.posX + food.grosseur){
-            foodOrObs.isOnCanvas = false;
-        }
-
-        // cote bas
-        if(yteteSerp == food.posY + food.grosseur && xTeteSerp >= food.posX  && xTeteSerp <= food.posX + food.grosseur){
-            foodOrObs.isOnCanvas = false;
-        }
-
-
-    });
-    return tabFood;
+export function colliSerpMur(serpent){
+    var colli = false;
+    if (serpent.corps[0].positionX + serpent.teteSerpent.longueurCote >= 700){
+        colli = true;
+    }
+    if(serpent.corps[0].positionX < 0){ // <= normalement mais comme on commence a 0,0 ca fera pas de sens
+        colli = true;
+    }
+    if(serpent.corps[0].positionY + serpent.teteSerpent.longueurCote >= 700) {
+        colli = true;
+    }
+    if(serpent.corps[0].positionY  < 0 ){
+        colli = true;
+    }
+    return colli;
 }

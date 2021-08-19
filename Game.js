@@ -2,7 +2,7 @@
 import EntreeUser from "./EntreeUser.js";
 import obsSansColli from "./obstacleCadreSansCollision.js";
 import { animationObstacleSansColli , animation} from "./animation.js";
-import { colliSerpFood } from "./GestionCollision.js";
+import { colliSerpFood , colliSerpMur} from "./GestionCollision.js";
 
 export default class Game
 {
@@ -72,8 +72,8 @@ export default class Game
         // la g les positions ou je peux placer mes differents obstacle
         posObsCadreSansColli = obs.placeObstacleSansCollision(this.imgObsSansColli,[],0);
         mesObs = animationObstacleSansColli(posObsCadreSansColli,this.imgObsSansColli);
-        
-        console.log("Mon tableau de Position:"+posObsCadreSansColli);
+
+        this.serpent.whichCanvas = colliOuPas; // a mettre commentaire
     
         this.gameLoop(this.layout,nourritureSurLeCanvas,this.imgFood,obsSurLeCanvas,this.imgObs,colliOuPas,posObsCadreSansColli,this.imgObsSansColli,mesObs,this.serpent,this.imgSerp,0);
     }
@@ -107,7 +107,12 @@ export default class Game
         }
         // source: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         timeStamp = Date.now();
-        this.animationId = window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) );   
+        if(colliOuPas == 1 &&  colliSerpMur(monserpent)){ 
+            //alert('Vous avez perdu , Dommage!!');
+            this.gameQuit();
+        }else{
+            window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) ); 
+        }  
     }
 
 

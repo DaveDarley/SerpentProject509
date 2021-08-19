@@ -16,6 +16,8 @@ export default class Serpent
         this.dernierPositionTeteSerpent= [];
         this.changerDirect = false;
         this.ancienDirection  = 0
+
+        this.whichCanvas = 0; // pour que le serpent puisse savoir dans quelle cadre il joue
     }
 
     //Fonction renvoyant la position de la tete du serpent 
@@ -27,6 +29,22 @@ export default class Serpent
     //Fonction permettant de mettre a jour les position du corps du serpent
     mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect){
 
+        // ex : petit prob avec l'apparition du serpent qd ca sort du cote est et 
+        // ca doit apparaitre a l'ouest 
+        if(this.whichCanvas == 2){ // gere cadre sans collisions
+            if (this.corps[0].positionX  > 700){
+                this.corps[0].positionX = 0 - this.teteSerpent.longueurCote;
+            }   
+            if(this.corps[0].positionX + this.teteSerpent.longueurCote < 0){
+                this.corps[0].positionX = 700;
+            }
+            if(this.corps[0].positionY > 700) {
+                this.corps[0].positionY = 0 - this.teteSerpent.longueurCote;
+            }
+            if(this.corps[0].positionY + this.teteSerpent.longueurCote < 0 ){
+                this.corps[0].positionY = 700;
+            }
+        }
         this.gestionMouvementSerpent(1,ancienTeteX,ancienTeteY,ancienDirect);
     }
 
