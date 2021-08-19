@@ -6,7 +6,7 @@ import { colliSerpFood } from "./GestionCollision.js";
 
 export default class Game
 {
-    constructor(canvas, layout, serpent, gameWidth,gameHeight,  imgObs ,imgFood, imgObsSansColli, imgSerp)
+    constructor(canvas, layout, serpent, gameWidth,gameHeight,  imgObs ,imgFood, imgObsSansColli, imgSerp )
     {
         this.canvas = canvas;
         this.layout = layout;
@@ -80,34 +80,34 @@ export default class Game
 
     
     gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp){
+       
+        layout.clearRect(0,0,700,700);
         if(this.state == "pause"){
-
+           
             nourritureSurLeCanvas.forEach(function(food){
                 layout.drawImage(food.image,food.posX,food.posY,food.getGrosseurNourriture(),food.getGrosseurNourriture())
             });
             // Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
             if(colliOuPas == 1){ 
-                obsSurLeCanvas.forEach(function(food){
-                    layout.drawImage(food.image,food.posX,food.posY,food.grosseur,food.grosseur)
-                });
+                obsSurLeCanvas.forEach(function(obs){
+                    layout.drawImage(obs.image,obs.posX,obs.posY,obs.grosseur,obs.grosseur);
+                });   
             }else{
                 mesObs.forEach(function(Obs){
                     Obs.placerMonObstacle(layout);
                 });
             }
             this.serpent.dessiner(layout,this.imgSerp);
-            
+
         }else{
             // quoi faire qd la tete du serpent entre en collision avec une nourriture;
             nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
-            var collisionSerpent = colliSerpObs(/*tabObst,*/this.serpent,colliOuPas);
 
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
         }
-
         // source: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         timeStamp = Date.now();
-        window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) );
+        this.animationId = window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) );   
     }
 
 

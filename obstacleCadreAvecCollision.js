@@ -22,7 +22,7 @@ export default class ObsCadreAvecColli {
         this.isOnCanvas = true;
 
         // Qd l'obstacle quitte le canvas on le redessine plus
-        if (positionX + this.grosseur <= 0 || positionX >= 700 || positionY + this.grosseur <= 0 || positionY >= 700){
+        if (positionX + this.grosseur < 0 || positionX >= 700 || positionY + this.grosseur < 0 || positionY >= 700){
            // layout.clearRect(0,0,700,700);
             this.isOnCanvas = false;
         }else{
@@ -31,9 +31,11 @@ export default class ObsCadreAvecColli {
 
                 case 0: // Mur Nord
                     console.log("deplacement a partir de 0");
-                    layout.drawImage(this.image, this.posX,this.posY - this.grosseur,40,40);  // this.posY - this.grosseur pour une entree smooth sur le canvas
+                    layout.drawImage(this.image, this.posX,this.posY ,grosseur,grosseur); 
+
                     if(this.xDepart >= 400){this.posX += 0.4;}else{this.posX -= 0.4;}
                     this.posY = this.posY + 0.4;
+                    //layout.drawImage(this.image, this.posX,this.posY - this.grosseur,grosseur,grosseur);  // this.posY - this.grosseur pour une entree smooth sur le canvas
                 break;
           
                 case 1:  // Mur est
@@ -52,9 +54,10 @@ export default class ObsCadreAvecColli {
           
                 case 3:  // Mur ouest
                   console.log("deplacement a partir de 3");
-                  layout.drawImage(this.image, this.posX - this.grosseur,this.posY ,grosseur,grosseur);
+                  layout.drawImage(this.image, this.posX ,this.posY ,grosseur,grosseur);
                   if(this.yDepart>=400){ this.posY -= 0.4;}else{this.posY += 0.4}
                   this.posX = this.posX + 0.4;
+                 // layout.drawImage(this.image, this.posX - this.grosseur,this.posY ,grosseur,grosseur);
                 break;
             }
 
