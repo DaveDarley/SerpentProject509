@@ -79,3 +79,33 @@ export function colliSerpMur(serpent){
     }
     return colli;
 }
+
+export function colliSerp(serpent){
+    var teteSerp = serpent.corps[0];
+    var colli = false;
+    for(var i=1; i<serpent.corps.length; i++){ 
+
+        // check collision des 4 cotes
+        
+              // verification collision vers le bas
+            if(teteSerp.positionX == serpent.corps[i].positionX && serpent.corps[i].positionY == teteSerp.positionY + teteSerp.longueurCote  && teteSerp.direction == 40){
+                colli = true;
+            }
+
+            // cote ouest:
+            if(serpent.corps[i].positionX == teteSerp.positionX + teteSerp.longueurCote && serpent.corps[i].positionY == teteSerp.positionY && teteSerp.direction == 39 ){
+                colli = true;
+            }
+
+            // cote est:
+            if(serpent.corps[i].positionX + serpent.corps[i].longueurCote == teteSerp.positionX  && serpent.corps[i].positionY == teteSerp.positionY && teteSerp.direction == 37){
+                colli = true;
+            }
+
+            // cote sud:
+            if(teteSerp.positionX == serpent.corps[i].positionX && serpent.corps[i].positionY + serpent.corps[i].longueurCote == teteSerp.positionY && teteSerp.direction == 38){
+                colli = true;
+            }
+        }
+    return colli;
+}

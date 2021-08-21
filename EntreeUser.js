@@ -18,7 +18,7 @@ export default class EntreeUser
                     var ancienTeteX = serpent.corps[0].positionX ;
                     var ancienTeteY = serpent.corps[0].positionY ;
                     var ancienDirect = serpent.corps[0].direction;
-                    serpent.corps[0].positionX = serpent.corps[0].positionX  -  serpent.corps[0].longueurCote -  2;
+                    serpent.corps[0].positionX = serpent.corps[0].positionX  -  serpent.corps[0].longueurCote; //-  2;
                     serpent.corps[0].direction = 37;
                     serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect);
                 }
@@ -29,7 +29,7 @@ export default class EntreeUser
                     var ancienTeteX = serpent.corps[0].positionX ;
                     var ancienTeteY = serpent.corps[0].positionY ;
                     var ancienDirect = serpent.corps[0].direction;
-                    serpent.corps[0].positionX = serpent.corps[0].positionX  +  serpent.corps[0].longueurCote +  2;
+                    serpent.corps[0].positionX = serpent.corps[0].positionX  +  serpent.corps[0].longueurCote;// +  2;
                     serpent.corps[0].direction = 39;
                     serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect);
                 }
@@ -40,7 +40,7 @@ export default class EntreeUser
                     var ancienTeteX = serpent.corps[0].positionX ;
                     var ancienTeteY = serpent.corps[0].positionY ;
                     var ancienDirect = serpent.corps[0].direction;
-                    serpent.corps[0].positionY = serpent.corps[0].positionY  -  serpent.corps[0].longueurCote -  2;
+                    serpent.corps[0].positionY = serpent.corps[0].positionY  -  serpent.corps[0].longueurCote;// -  2;
                     serpent.corps[0].direction = 38;
                     serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect);
                 }
@@ -51,7 +51,7 @@ export default class EntreeUser
                     var ancienTeteX = serpent.corps[0].positionX ;
                     var ancienTeteY = serpent.corps[0].positionY ;
                     var ancienDirect = serpent.corps[0].direction;
-                    serpent.corps[0].positionY = serpent.corps[0].positionY  +  serpent.corps[0].longueurCote +  2;
+                    serpent.corps[0].positionY = serpent.corps[0].positionY  +  serpent.corps[0].longueurCote;// +  2;
                     serpent.corps[0].direction = 40;
                     serpent.mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect);
                 }
