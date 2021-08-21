@@ -14,8 +14,8 @@
 // qd la tete de la tete du serpent est largement superieur a la nourriture
 // Voir demain avec barreau et bitho
 
-//Si trop grand, il faut reduire
 
+// If trop grand , faut les reduire
 export function colliSerpFood(tabFood,serpent){
     var teteSerpent = serpent.corps[0];
     var xTeteSerp = teteSerpent.positionX;
@@ -27,7 +27,7 @@ export function colliSerpFood(tabFood,serpent){
     tabFood.forEach(function(food){
 
         // sort de la gauche vers la droite 
-       if(teteSerpent.direction == 39 && xTeteSerp + grosseurCoteSerp >= food.posX && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) )){
+       /*if(teteSerpent.direction == 39 && xTeteSerp + grosseurCoteSerp >= food.posX && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) )){
           ptsToAdd += food.ptsDeVie;
           food.isOnCanvas = false;
           serpent.agrandirSerpent();
@@ -38,10 +38,10 @@ export function colliSerpFood(tabFood,serpent){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
-        }
+        }*/
 
         // sort du haut vers le bas
-        if(teteSerpent.direction == 40 && yteteSerp + grosseurCoteSerp >= food.posY && ((xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur)) ){
+        if(teteSerpent.direction == 40 && yteteSerp + grosseurCoteSerp >= food.posY && ((xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur) || (food.posX >= xTeteSerp  && food.posX + food.grosseur <= xTeteSerp + grosseurCoteSerp)  ) ){
 
             console.log(teteSerpent.direction);
             console.log(yteteSerp + grosseurCoteSerp );
@@ -51,105 +51,61 @@ export function colliSerpFood(tabFood,serpent){
             serpent.agrandirSerpent(); 
         }
 
-        // sort du bas vers le haut
+       /* // sort du bas vers le haut
         if(teteSerpent.direction == 38 && yteteSerp <= food.posY + food.grosseur && ( (xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur) )){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
-        }
+        }*/
     });
     document.getElementById("ptsDeVie").innerHTML = ptsToAdd;
     return tabFood;
 }
 
 
-// Un peu toff
-// Gerer non seulement avec tete serpent mais aussi avec corps serpent
-// on a pas encore gerer les collisions entre obstacles , et serpent (on doit le faire dans cette fonction )
-export function colliSerpObs(/*tabObst,*/serpent/*,colliOuPas*/){
-    var teteSerpent = serpent.corps[0];
-    var collision = false;
-
-    var grosseurCoteSerp = teteSerpent.longueurCote;
-
-    /*
-    //Pour chaque obstabcle
-    tabObst.forEach(function(obst){
-        // cote gauche
-        //Pour chaque partie du corps du serpent
-        serpent.corps.forEach(function(partieCorps)
-        {
-            switch (obst.direction) {
-                //Mur Nord
-                case 0:
-                    if ( (partieCorps.positionX == Obst.posX) || partieCorps.positionY == Obst.posY)
-                    return true;
-                    break;
-                
-                //Mur Est
-                case 1:
-
-                    break;
-
-                //Mur Sud
-                case 2:
-
-                    break;
-            
-                //Mur Ouest
-                case 3:
-
-                    break;
-            }
-            
-            if ( (partieCorps.positionX == Obst.posX) || partieCorps.positionY == Obst.posY)
-            return true;
-        })
-
-        
-        if(xTeteSerp + grosseurCoteSerp == food.posX && yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur){
-          
-          foodOrObs.isOnCanvas = false;
-        }
-
-        // cote droit
-        if(xTeteSerp  == food.posX + food.grosseur && yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur){
-            foodOrObs.isOnCanvas = false;
-        }
-
-        // cote haut
-        if(food.posY == yteteSerp + grosseurCoteSerp && xTeteSerp >= food.posX  && xTeteSerp <= food.posX + food.grosseur){
-            foodOrObs.isOnCanvas = false;
-        }
-
-        // cote bas
-        if(yteteSerp == food.posY + food.grosseur && xTeteSerp >= food.posX  && xTeteSerp <= food.posX + food.grosseur){
-            foodOrObs.isOnCanvas = false;
-        }
-
-
-    });
-    return tabFood;
-    */
-
-
-    //Gestion collision avec le corps du serpent
-    // serpent.corps.forEach(function(partieCorps)
-    // {
-    //     if (partieCorps.collision(serpent) == true)
-    //     {
-    //         collision = true;
-    //     }
-    // });
-
-    for (let i = 1; i < serpent.corps.length; i++){
-        
-        if (serpent.corps[i].collision(serpent)== true)
-        {
-            collision = true;
-            console.log(collision);
-        }
+export function colliSerpMur(serpent){
+    var colli = false;
+    if (serpent.corps[0].positionX + serpent.teteSerpent.longueurCote >= 700){
+        colli = true;
     }
+    if(serpent.corps[0].positionX < 0){ // <= normalement mais comme on commence a 0,0 ca fera pas de sens
+        colli = true;
+    }
+    if(serpent.corps[0].positionY + serpent.teteSerpent.longueurCote >= 700) {
+        colli = true;
+    }
+    if(serpent.corps[0].positionY  < 0 ){
+        colli = true;
+    }
+    return colli;
+}
 
-    return collision; 
+export function colliSerp(serpent){
+    var teteSerp = serpent.corps[0];
+    var colli = false;
+    for(var i=1; i<serpent.corps.length; i++){ 
+
+        // check collision des 4 cotes
+        
+              // verification collision vers le bas
+            if(teteSerp.positionX == serpent.corps[i].positionX && serpent.corps[i].positionY == teteSerp.positionY + teteSerp.longueurCote  && teteSerp.direction == 40){
+                colli = true;
+            }
+
+            // cote ouest:
+            if(serpent.corps[i].positionX == teteSerp.positionX + teteSerp.longueurCote && serpent.corps[i].positionY == teteSerp.positionY && teteSerp.direction == 39 ){
+                colli = true;
+            }
+
+            // cote est:
+            if(serpent.corps[i].positionX + serpent.corps[i].longueurCote == teteSerp.positionX  && serpent.corps[i].positionY == teteSerp.positionY && teteSerp.direction == 37){
+                colli = true;
+            }
+
+            // cote sud:
+            if(teteSerp.positionX == serpent.corps[i].positionX && serpent.corps[i].positionY + serpent.corps[i].longueurCote == teteSerp.positionY && teteSerp.direction == 38){
+                colli = true;
+            }
+        }
+    return colli;
 }
