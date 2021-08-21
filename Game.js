@@ -80,8 +80,10 @@ export default class Game
 
     
     gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp){
-       
+
         layout.clearRect(0,0,700,700);
+
+
         if(this.state == "pause"){
            
             nourritureSurLeCanvas.forEach(function(food){
@@ -106,7 +108,7 @@ export default class Game
 
             if( collisionBoolean == true)
             {
-                this.gameQuit(); 
+                console.log("You lost, Ah AH");
             }
 
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);

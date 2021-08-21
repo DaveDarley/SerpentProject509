@@ -48,6 +48,15 @@ export default class obstacleSansCollision {
     }
 
     placerMonObstacle(layout){
+
+                        //Ajout test: L
+                        layout.beginPath();
+                        layout.lineWidth = "3";
+                        layout.strokeStyle = "black";
+                        layout.rect(this.posX,this.posY,this.grosseur,this.grosseur);
+                        layout.stroke();
+                        // Fin Test
+
         layout.drawImage(this.image,this.posX,this.posY,this.grosseur,this.grosseur);
     }
 

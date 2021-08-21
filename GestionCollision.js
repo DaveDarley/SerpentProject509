@@ -134,12 +134,22 @@ export function colliSerpObs(/*tabObst,*/serpent/*,colliOuPas*/){
 
 
     //Gestion collision avec le corps du serpent
-    serpent.corps.forEach(function(partieCorps)
-    {
-        if (partieCorps.collision(serpent) == true)
+    // serpent.corps.forEach(function(partieCorps)
+    // {
+    //     if (partieCorps.collision(serpent) == true)
+    //     {
+    //         collision = true;
+    //     }
+    // });
+
+    for (let i = 1; i < serpent.corps.length; i++){
+        
+        if (serpent.corps[i].collision(serpent)== true)
         {
             collision = true;
+            console.log(collision);
         }
-    });
+    }
+
     return collision; 
 }

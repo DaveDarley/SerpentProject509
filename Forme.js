@@ -32,6 +32,21 @@ export default class Forme
                 return true;
             }
         }
+
+        // if ((serpent.teteSerpent.positionX > this.positionX + this.longueurCote )||
+        //          (this.positionX > serpent.teteSerpent.positionX + this.longueurCote)||
+        //          (serpent.teteSerpent.positionY > this.positionY + this.longueurCote)||
+        //          (this.positionY > serpent.teteSerpent.positionY + this.longueurCote))
+        //     {
+        //         console.log(" Pas de Collision");
+        //         return false;
+        //     }
+        //     else
+        //     {
+        //         console.log(" Collision ");
+        //         return true;
+        //     }
+
     }
 
 }

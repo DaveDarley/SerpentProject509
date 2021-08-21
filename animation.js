@@ -144,6 +144,11 @@ export function animationObstacleSansColli(tabPosObs,imgObs){
         var grosseur = (Math.floor(Math.random() *7) * 10) + 20; // grosseur entre 20 px et 50 px
         var ptsDeVieEnleves = Math.floor(Math.random() *9) + 1; // pts qui sera enleve du serpent s'il rentre en collision avec l'obstacle
         let obs = new obsSansColli(imgObs[whichObs],grosseur,tabPosObs[i][0],tabPosObs[i][1],ptsDeVieEnleves);
+
+
+
+
+
         obsSansCollision.push(obs);
     }
     return obsSansCollision;

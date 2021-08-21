@@ -11,21 +11,13 @@ constructor(image,ptsDeVie,grosseur,posX,posY,vitesse,direction,isOnCanvas){
   this.vitesse = vitesse;
   this.direction = direction;
   this.isOnCanvas = false;
-
-
 }
-
-
-
-
 
 frame(layout,id){
 
   let positionX = this.getX();
   let positionY = this.getY();
   let grosseur = this.getGrosseurNourriture();
-
-  
 
   if (positionX + grosseur <= 0 || positionX >= 700 || positionY + grosseur <= 0 || positionY >= 700){
       //layout.clearRect(0,0,700,700);

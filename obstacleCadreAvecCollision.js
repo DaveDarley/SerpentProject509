@@ -31,6 +31,13 @@ export default class ObsCadreAvecColli {
 
                 case 0: // Mur Nord
                     console.log("deplacement a partir de 0");
+                                            //Ajout test: L
+                                            layout.beginPath();
+                                            layout.lineWidth = "3";
+                                            layout.strokeStyle = "black";
+                                            layout.rect(this.posX,this.posY,this.grosseur,this.grosseur);
+                                            layout.stroke();
+                                            // Fin Test
                     layout.drawImage(this.image, this.posX,this.posY ,grosseur,grosseur); 
 
                     if(this.xDepart >= 400){this.posX += 0.4;}else{this.posX -= 0.4;}
@@ -40,6 +47,13 @@ export default class ObsCadreAvecColli {
           
                 case 1:  // Mur est
                   console.log("deplacement a partir de 1");
+                                          //Ajout test: L
+                                          layout.beginPath();
+                                          layout.lineWidth = "3";
+                                          layout.strokeStyle = "black";
+                                          layout.rect(this.posX,this.posY,this.grosseur,this.grosseur);
+                                          layout.stroke();
+                                          // Fin Test
                   layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
                   if(this.yDepart>=400){ this.posY -= 0.4;}else{this.posY += 0.4;}
                   this.posX = this.posX - 0.4;
@@ -47,6 +61,13 @@ export default class ObsCadreAvecColli {
           
                 case 2: // Mur sud
                   console.log("deplacement a partir de  2");
+                                          //Ajout test: L
+                                          layout.beginPath();
+                                          layout.lineWidth = "3";
+                                          layout.strokeStyle = "black";
+                                          layout.rect(this.posX,this.posY,this.grosseur,this.grosseur);
+                                          layout.stroke();
+                                          // Fin Test
                   layout.drawImage(this.image, this.posX,this.posY,grosseur,grosseur);
                   if(this.xDepart >= 400){this.posX -= 0.4;}else{this.posX += 0.4;}
                   this.posY = this.posY - 0.4;
@@ -54,6 +75,13 @@ export default class ObsCadreAvecColli {
           
                 case 3:  // Mur ouest
                   console.log("deplacement a partir de 3");
+                                          //Ajout test: L
+                                          layout.beginPath();
+                                          layout.lineWidth = "3";
+                                          layout.strokeStyle = "black";
+                                          layout.rect(this.posX,this.posY,this.grosseur,this.grosseur);
+                                          layout.stroke();
+                                          // Fin Test
                   layout.drawImage(this.image, this.posX ,this.posY ,grosseur,grosseur);
                   if(this.yDepart>=400){ this.posY -= 0.4;}else{this.posY += 0.4}
                   this.posX = this.posX + 0.4;
