@@ -2,7 +2,7 @@
 import EntreeUser from "./EntreeUser.js";
 import obsSansColli from "./obstacleCadreSansCollision.js";
 import { animationObstacleSansColli , animation} from "./animation.js";
-import { colliSerpFood , colliSerpMur , colliSerp} from "./GestionCollision.js";
+import { colliSerpFood , colliSerpMur , colliSerp, colliObtsEnMouvement} from "./GestionCollision.js";
 
 export default class Game
 {
@@ -101,8 +101,8 @@ export default class Game
 
         }else{
             // quoi faire qd la tete du serpent entre en collision avec une nourriture;
-           // nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
-
+              nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
+              obsSurLeCanvas =  colliObtsEnMouvement(monserpent, obsSurLeCanvas);
 
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
 

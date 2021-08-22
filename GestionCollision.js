@@ -109,3 +109,40 @@ export function colliSerp(serpent){
         }
     return colli;
 }
+
+export function colliObtsEnMouvement(serpent, obstacles)
+{
+    for (let i = 0; i < obstacles.length; i++) {
+
+        switch (serpent.teteSerpent.direction) {
+            //Gauche
+            case 37:
+                
+                break;
+            
+            //Droite
+            case 39:
+                break;
+
+                //Haut
+            case 38:
+                if( (((serpent.teteSerpent.positionX < obstacles[i].posX + obstacles[i].grosseur) && (serpent.teteSerpent.positionX > obstacles[i].posX)) ||
+                    ((obstacles[i].posX < serpent.teteSerpent.positionX + obstacles[i].grosseur)&& (obstacles[i].posX > serpent.teteSerpent.positionX)))&&
+                    (serpent.teteSerpent.positionY <= (obstacles[i].posY + obstacles[i].grosseur))
+                )
+                {
+                    obstacles[i].isOnCanvas = false;
+                    alert("J'ai frappe le serpent Ahhhh");
+                }
+                break;
+
+            //Bas
+            case 40:
+
+                break;
+            default:
+                break;
+        }
+    }
+    return obstacles;
+}

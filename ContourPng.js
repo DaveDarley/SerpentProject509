@@ -1,6 +1,6 @@
 class ContourPng
 {
-    constructor(tailleImage)
+    constructor(positionX, positionY, tailleImageLargeur, tailleImageLongueur)
     {
         this.tailleImage = tailleImage;
     }
