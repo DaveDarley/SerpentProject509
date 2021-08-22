@@ -101,12 +101,12 @@ export default class Game
 
         }else{
             // quoi faire qd la tete du serpent entre en collision avec une nourriture;
-           // nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
+            nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
 
 
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
 
-            if(colliSerp(monserpent)){
+            if(colliSerp(monserpent)){  // si le serpent rentre en collision avec lui meme !!
                 this.gameQuit();
             }
         }

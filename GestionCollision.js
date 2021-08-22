@@ -10,9 +10,7 @@
 
 
 
-// Cas qui n'a pas encore gere ici;
-// qd la tete de la tete du serpent est largement superieur a la nourriture
-// Voir demain avec barreau et bitho
+// A tester plus en profondeur ;;
 
 
 // If trop grand , faut les reduire
@@ -20,45 +18,43 @@ export function colliSerpFood(tabFood,serpent){
     var teteSerpent = serpent.corps[0];
     var xTeteSerp = teteSerpent.positionX;
     var yteteSerp = teteSerpent.positionY;
-    var grosseurCoteSerp = teteSerpent.longueurCote
-    var ptsToAdd = parseInt(document.getElementById("ptsDeVie").innerHTML);
+    var grosseurCoteSerp = teteSerpent.longueurCote;
+    
+    var ptsToAdd = parseInt(document.getElementById("ptsGagnes").innerHTML);
     
 
     tabFood.forEach(function(food){
 
         // sort de la gauche vers la droite 
-       /*if(teteSerpent.direction == 39 && xTeteSerp + grosseurCoteSerp >= food.posX && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) )){
+        if(teteSerpent.direction == 39 && xTeteSerp + grosseurCoteSerp >= food.posX && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) || (food.posY >= yteteSerp && food.posY + food.grosseur <= yteteSerp + grosseurCoteSerp) || (food.posY <= yteteSerp && food.posY + food.grosseur >= yteteSerp + grosseurCoteSerp) )){
           ptsToAdd += food.ptsDeVie;
           food.isOnCanvas = false;
           serpent.agrandirSerpent();
         }
 
         // sort de la droite vers la gauce
-        if(teteSerpent.direction == 37 && xTeteSerp  <= food.posX + food.grosseur && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) )){
+        if(teteSerpent.direction == 37 && xTeteSerp <= food.posX + food.grosseur && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) || (food.posY >= yteteSerp && food.posY + food.grosseur <= yteteSerp + grosseurCoteSerp) || (food.posY <= yteteSerp && food.posY + food.grosseur >= yteteSerp + grosseurCoteSerp) )){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
-        }*/
+        }
 
         // sort du haut vers le bas
-        if(teteSerpent.direction == 40 && yteteSerp + grosseurCoteSerp >= food.posY && ((xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur) || (food.posX >= xTeteSerp  && food.posX + food.grosseur <= xTeteSerp + grosseurCoteSerp)  ) ){
+        if(teteSerpent.direction == 40 && yteteSerp + grosseurCoteSerp >= food.posY && ((food.posX >= xTeteSerp && food.posX <= xTeteSerp + grosseurCoteSerp) || (food.posX + food.grosseur >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp + grosseurCoteSerp) || (food.posX >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp) || (food.posX <= xTeteSerp && food.posX + food.grosseur >= xTeteSerp + grosseurCoteSerp)  ) ){
 
-            console.log(teteSerpent.direction);
-            console.log(yteteSerp + grosseurCoteSerp );
-            console.log(food.posY);
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent(); 
         }
 
-       /* // sort du bas vers le haut
-        if(teteSerpent.direction == 38 && yteteSerp <= food.posY + food.grosseur && ( (xTeteSerp >= food.posX && xTeteSerp <= food.posX + food.grosseur) || (xTeteSerp + grosseurCoteSerp >= food.posX && xTeteSerp + grosseurCoteSerp <= food.posX + food.grosseur) )){
+       // sort du bas vers le haut
+        if(teteSerpent.direction == 38 && yteteSerp <= food.posY + food.grosseur  && ((food.posX >= xTeteSerp && food.posX <= xTeteSerp + grosseurCoteSerp) || (food.posX + food.grosseur >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp + grosseurCoteSerp) || (food.posX >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp) || (food.posX <= xTeteSerp && food.posX + food.grosseur >= xTeteSerp + grosseurCoteSerp)  ) ){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
-        }*/
+        }
     });
-    document.getElementById("ptsDeVie").innerHTML = ptsToAdd;
+    document.getElementById("ptsGagnes").innerHTML = ptsToAdd;
     return tabFood;
 }
 
