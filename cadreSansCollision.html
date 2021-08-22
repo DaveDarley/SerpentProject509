@@ -1,33 +1,47 @@
 <!doctype html>
 
 <html>
-<head>
- <title>Cadre Sans Collision</title>
- <link rel="stylesheet" href="index.css">
- 
-</head>
+  <head>
+  <title>Cadre Sans Collision</title>
+  <link rel="stylesheet" href="index.css">
+  
+  </head>
 
-<body >
-  <h1 style="text-align:left;"> Cadre Sans Collisions </h1>
+  <body >
+    <h1 style="text-align:left;"> Cadre Sans Collisions </h1>
+    <div class="MessageGameOver" id = "MessageGameOver">
+        <div class="MessageGameOver-Header">
+            Game Over
+            <img src="image/gameOver.png" alt="Image game over" width="100px">
+        </div>
 
-  <div class="parent">
-      <div class="narrow"> <canvas id="sansColli" class="gameScreen" width="700px" height="700px"></canvas>  </div>
-      <div class="wide">
+        <div class="MessageGameOver-Body">
+          <p>Vous avez perdu</p>
+          <p> Votre temps de jeu est : </p>
+          <p>Votre score est : </p>
+        </div>
+    </div>
 
+    <div class="parent">
+
+        <div class="narrow"> <canvas id="sansColli" class="gameScreen" width="700px" height="700px"></canvas>  
+        </div>
+
+        <div class="wide">
           <h3>POINTS GAGNES</h3>
           <div class="afficheInfos"></div>
           <h3>POINTS DE VIE DU SERPENT</h3>
           <div class="afficheInfos" id="ptsDeVie"></div>
+        </div>
 
-     </div>
- </div>
+  </div>
 
- <div class="infosSurLaPartie">
-   <h3 id="pause">1) Pause </h3>
-   <h3 id="quit">2) Quitter la partie</h3>
-   <h3 id="restart">3) Recommencer la partie</h3>
- </div>
+  <div class="infosSurLaPartie">
+    <h3 id="pause">1) Pause </h3>
+    <h3 id="quit">2) Quitter la partie</h3>
+    <h3 id="restart">3) Recommencer la partie</h3>
+  </div>
 
-</body>
-<script type="module" src="index.js"></script>
+  </body>
+  <script type="module" src="index.js"></script>
 </html>
