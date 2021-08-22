@@ -132,7 +132,6 @@ export function colliObtsEnMouvement(serpent, obstacles)
                 )
                 {
                     obstacles[i].isOnCanvas = false;
-                    alert("J'ai frappe le serpent Ahhhh");
                 }
                 break;
 
