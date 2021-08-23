@@ -59,6 +59,8 @@ serpent.corps[0].PositionY = 0;
 
 //Debut de la partie
 document.getElementById("ptsDeVie").innerHTML = serpent.pointDeVie;
+document.getElementById("ptsGagnes").innerHTML = 0;
+
 game.gameStart();
 serpent.layout = game.layout
 

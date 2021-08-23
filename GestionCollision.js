@@ -9,52 +9,34 @@
 */
 
 
-
-// A tester plus en profondeur ;;
-
-
-// If trop grand , faut les reduire
+/*
+    Ici on gere tout collision entre tete du serpent et nourriture
+    c-a-d qd le serpent mange la nourriture
+    Reference sur comment gerer la collision: https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
+*/
 export function colliSerpFood(tabFood,serpent){
     var teteSerpent = serpent.corps[0];
     var xTeteSerp = teteSerpent.positionX;
-    var yteteSerp = teteSerpent.positionY;
+    var yTeteSerp = teteSerpent.positionY;
     var grosseurCoteSerp = teteSerpent.longueurCote;
     
     var ptsToAdd = 0;
-    
 
     tabFood.forEach(function(food){
+        var xFood = food.posX;
+        var yFood = food.posY;
+        var grosseurFood = food.grosseur;
 
-        // sort de la gauche vers la droite 
-        if(teteSerpent.direction == 39 && xTeteSerp + grosseurCoteSerp >= food.posX && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) || (food.posY >= yteteSerp && food.posY + food.grosseur <= yteteSerp + grosseurCoteSerp) || (food.posY <= yteteSerp && food.posY + food.grosseur >= yteteSerp + grosseurCoteSerp) )){
-          ptsToAdd += food.ptsDeVie;
-          food.isOnCanvas = false;
-          serpent.agrandirSerpent();
-        }
-
-        // sort de la droite vers la gauce
-        if(teteSerpent.direction == 37 && xTeteSerp <= food.posX + food.grosseur && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) || (food.posY >= yteteSerp && food.posY + food.grosseur <= yteteSerp + grosseurCoteSerp) || (food.posY <= yteteSerp && food.posY + food.grosseur >= yteteSerp + grosseurCoteSerp) )){
-            ptsToAdd += food.ptsDeVie;
+        if (xTeteSerp > grosseurFood + xFood || xFood > grosseurCoteSerp + xTeteSerp || yTeteSerp > grosseurFood + yFood || yFood > grosseurCoteSerp + yTeteSerp){
+            // Pas de collision ici
+        }else{
+            ptsToAdd = parseInt(document.getElementById("ptsGagnes").innerHTML) + food.ptsDeVie;
+            document.getElementById("ptsGagnes").innerHTML = ptsToAdd + ""
             food.isOnCanvas = false;
+            
             serpent.agrandirSerpent();
         }
-
-        // sort du haut vers le bas
-        if(teteSerpent.direction == 40 && yteteSerp + grosseurCoteSerp >= food.posY && ((food.posX >= xTeteSerp && food.posX <= xTeteSerp + grosseurCoteSerp) || (food.posX + food.grosseur >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp + grosseurCoteSerp) || (food.posX >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp) || (food.posX <= xTeteSerp && food.posX + food.grosseur >= xTeteSerp + grosseurCoteSerp)  ) ){
-
-            ptsToAdd += food.ptsDeVie;
-            food.isOnCanvas = false;
-            serpent.agrandirSerpent(); 
-        }
-
-       // sort du bas vers le haut
-        if(teteSerpent.direction == 38 && yteteSerp <= food.posY + food.grosseur  && ((food.posX >= xTeteSerp && food.posX <= xTeteSerp + grosseurCoteSerp) || (food.posX + food.grosseur >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp + grosseurCoteSerp) || (food.posX >= xTeteSerp && food.posX + food.grosseur <= xTeteSerp) || (food.posX <= xTeteSerp && food.posX + food.grosseur >= xTeteSerp + grosseurCoteSerp)  ) ){
-            ptsToAdd += food.ptsDeVie;
-            food.isOnCanvas = false;
-            serpent.agrandirSerpent();
-        } 
     });
-    document.getElementById("ptsGagnes").innerHTML = ptsToAdd;
     return tabFood;
 }
 
@@ -104,4 +86,37 @@ export function colliSerp(serpent){
             }
         }
     return colli;
+}
+
+/*
+    Importante lecon:
+    Au lieu d'essayer de prendre ts les cas ou ca marche (ya beaucoup);
+    mieux vaut chercher tous les cas ou ca marche pas .
+
+    Reference : https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
+*/
+export function colliSerpMovingObs(serpent,tabRoches){
+    var corpsSerp = serpent.corps;
+    
+    tabRoches.forEach(function(mesObs){
+        var xRoche = mesObs.posX;
+        var yRoche = mesObs.posY;
+        var grosseurRoche = mesObs.grosseur;
+
+        corpsSerp.forEach(function(partSerp){
+            var xSerp = partSerp.positionX;
+            var ySerp = partSerp.positionY;
+            var grosseurSerp = partSerp.longueurCote;
+
+            if (xSerp > grosseurRoche + xRoche || xRoche > grosseurSerp + xSerp || ySerp > grosseurRoche + yRoche || yRoche > grosseurSerp + ySerp){
+                // Pas de collision ici
+            }else{
+                // on a collision
+                // reduire pts de vie serpent
+                var ptsToRemove = parseInt(document.getElementById("ptsDeVie").innerHTML) - mesObs.ptsDeVieEnleves;
+                document.getElementById("ptsDeVie").innerHTML = ptsToRemove + ""
+                mesObs.isOnCanvas = false;
+            }
+        });
+    });
 }
