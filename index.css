@@ -1,5 +1,7 @@
 /*https://stackoverflow.com/questions/14073498/how-do-i-create-a-change-in-font-size-on-hover-without-realigning-other-text */
 
+@import url('http://fonts.cdnfonts.com/css/games');
+
 .choixModeJeu:hover {
   font-size: 50px;
 }
@@ -58,7 +60,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+ transform: translate(-50%, -50%);
   border: 8px solid black;
   border-radius: 150px;
   width:fit-content;
@@ -79,14 +81,18 @@
   background-color: white;
   width: 500px;
   max-width: 80%;
-
-  top: 50%;
-  left: 90%;
+  height: 60%;
+  top: 20%;
+  bottom: 20%;
+  background-color : #50C878;
+  color: white;
+ /* top: 40%;
+  /*left: 100%;*/
  /* transform: translateY(-90%); /* A bien revoir le fonctionnement du translate */
 
 
 
-  transition: transform 1s linear ;
+ animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 
 .modal-header {
@@ -114,16 +120,17 @@
 
 .modal-body {
   padding: 10px 15px; /* Meme padding que le modal-header */
+  font-family: 'Games', sans-serif;
 }
 
 
-/* Pour mon animation des consignes */
-.modal:hover {
-  animation: right-to-middle 1s ease-in forwards;
-}
 
-@keyframes right-to-middle {
-  100% {
-    transform : translateX(-50%);
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
   }
+  100% {
+    transform: translateX(0);
+  }
+
 }
