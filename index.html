@@ -8,10 +8,48 @@
  <link rel="stylesheet" href="index.css">
 </head>
 
-<body class="Bienvenue">
-  <h1 style="text-align:center;">BIENVENUE</h1>
-  <h2 style="text-align:center;">Veuillez choisir l'un de ces 2 modes de jeu</h2>
-  <h3 class="choixModeJeu" onclick="location.href='cadreSansCollision.html';">1) Cadre sans collision</h3>
-  <h3 class="choixModeJeu" onclick="location.href='cadreAvecCollision.html';">2) Cadre avec collision</h3>
+<body>
+  <div class="Bienvenue">
+    <h1 style="text-align:center;">BIENVENUE</h1>
+    <h2 style="text-align:center;">Veuillez choisir l'un de ces 2 modes de jeu</h2>
+    <h3 class="choixModeJeu" onclick="location.href='cadreSansCollision.html';">1) Cadre sans collision</h3>
+    <h3 class="choixModeJeu" onclick="location.href='cadreAvecCollision.html';">2) Cadre avec collision</h3>
+  </div>
+  <!-- consignes sur comment jouer le jeu!! -->
+  <div class="modal" id="modal">
+    
+    <!-- entete de mon pop up-->
+    <div class="modal-header">
+      <div class="title">Consignes du jeu </div>
+      <button class="close-button">&times;</button>
+    </div>
+
+    <!-- faut arranger le body apres -->
+    <div class="modal-body">
+      1)Cadre sans collisions:
+      <div>
+        Si vous frappez un obstacle, votre points de vie 
+        baisse. 
+        Si votre point de vie atteint 0, vous mourrez.
+        Mangez des fruits pour augmenter vos points de vie.
+      </div>
+
+      2) Cadre avec collision:
+      <div>
+        Si un obstacle vous frappe, vous perdez des points de vie.
+        Si vous frappez le cadre du jeu vous mourrez.
+        Si votre point de vie atteint 0, vous mourrez.
+        Mangez des fruits pour augmenter vos points de vie.
+    </div>
+      
+        
+      BONNE CHANCE
+    </div>
+  </div>
+  <!-- fin consignes jeu-->
+
+
+
+
 </body>
 </html>

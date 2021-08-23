@@ -20,7 +20,7 @@ export function colliSerpFood(tabFood,serpent){
     var yteteSerp = teteSerpent.positionY;
     var grosseurCoteSerp = teteSerpent.longueurCote;
     
-    var ptsToAdd = parseInt(document.getElementById("ptsGagnes").innerHTML);
+    var ptsToAdd = 0;
     
 
     tabFood.forEach(function(food){
@@ -33,7 +33,7 @@ export function colliSerpFood(tabFood,serpent){
         }
 
         // sort de la droite vers la gauce
-        if(teteSerpent.direction == 37 && xTeteSerp <= food.posX + food.grosseur && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) || (food.posY >= yteteSerp && food.posY + food.grosseur <= yteteSerp + grosseurCoteSerp) || (food.posY <= yteteSerp && food.posY + food.grosseur >= yteteSerp + grosseurCoteSerp) )){
+       /* if(teteSerpent.direction == 37 && xTeteSerp <= food.posX + food.grosseur && ( (yteteSerp >= food.posY && yteteSerp <= food.posY + food.grosseur) || (yteteSerp + grosseurCoteSerp >= food.posY && yteteSerp + grosseurCoteSerp <= food.posY + food.grosseur) || (food.posY >= yteteSerp && food.posY + food.grosseur <= yteteSerp + grosseurCoteSerp) || (food.posY <= yteteSerp && food.posY + food.grosseur >= yteteSerp + grosseurCoteSerp) )){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
@@ -52,7 +52,7 @@ export function colliSerpFood(tabFood,serpent){
             ptsToAdd += food.ptsDeVie;
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
-        }
+        } */
     });
     document.getElementById("ptsGagnes").innerHTML = ptsToAdd;
     return tabFood;

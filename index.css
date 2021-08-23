@@ -55,15 +55,75 @@
   color:white;
   background-image: url(https://thumbs.dreamstime.com/z/vintage-background-frame-vintage-background-frame-design-paper-decoration-128717526.jpg);
   height: fit-content;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 8px solid black;
   border-radius: 150px;
-  padding-left: 50px;
+  width:fit-content;
+  /*padding-left: 50px;
   padding-right: 50px;
   margin-left: 50px;
-  margin-right: 50px;
+  margin-right: 50px;*/
   
+}
+
+
+/* code css pour mon modal */
+
+.modal {
+  position: fixed; /* qd le user scroll up/down l'ecran, on veut que le modal bouge avec lui */
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  width: 500px;
+  max-width: 80%;
+
+  top: 50%;
+  left: 90%;
+ /* transform: translateY(-90%); /* A bien revoir le fonctionnement du translate */
+
+
+
+  transition: transform 1s linear ;
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex; /* les elements apparaissent l'un a cote de l'autre */
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border:none;
+  outline:none;
+  background: none;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 10px 15px; /* Meme padding que le modal-header */
+}
+
+
+/* Pour mon animation des consignes */
+.modal:hover {
+  animation: right-to-middle 1s ease-in forwards;
+}
+
+@keyframes right-to-middle {
+  100% {
+    transform : translateX(-50%);
+  }
 }
