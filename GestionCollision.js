@@ -33,7 +33,6 @@ export function colliSerpFood(tabFood,serpent){
             ptsToAdd = parseInt(document.getElementById("ptsGagnes").innerHTML) + food.ptsDeVie;
             document.getElementById("ptsGagnes").innerHTML = ptsToAdd + ""
             food.isOnCanvas = false;
-            
             serpent.agrandirSerpent();
         }
     });
@@ -103,6 +102,8 @@ export function colliSerpMovingObs(serpent,tabRoches){
         var yRoche = mesObs.posY;
         var grosseurRoche = mesObs.grosseur;
 
+        var ptsToRemove = mesObs.ptsDeVieEnleves;
+
         corpsSerp.forEach(function(partSerp){
             var xSerp = partSerp.positionX;
             var ySerp = partSerp.positionY;
@@ -113,10 +114,45 @@ export function colliSerpMovingObs(serpent,tabRoches){
             }else{
                 // on a collision
                 // reduire pts de vie serpent
-                var ptsToRemove = parseInt(document.getElementById("ptsDeVie").innerHTML) - mesObs.ptsDeVieEnleves;
-                document.getElementById("ptsDeVie").innerHTML = ptsToRemove + ""
+                var ptsDeVieSerp = parseInt(document.getElementById("ptsDeVie").innerHTML) - ptsToRemove ;
+                document.getElementById("ptsDeVie").innerHTML = ptsDeVieSerp + "";
+                serpent.pointDeVie  -=  ptsToRemove;
                 mesObs.isOnCanvas = false;
             }
         });
     });
 }
+
+// Collision entre serpent et obstacles , dans le cadre sans collisions
+export function colliSerpObs(serpent,tabRoches){
+    var teteSerp = serpent.corps[0];
+
+    var xSerp = teteSerp.positionX;
+    var ySerp = teteSerp.positionY;
+    var grosseurSerp = teteSerp.longueurCote;
+
+    
+    tabRoches.forEach(function(mesObs){
+        var xRoche = mesObs.posX;
+        var yRoche = mesObs.posY;
+        var grosseurRoche = mesObs.grosseur;
+
+        var ptsToRemove = mesObs.ptsDeVieEnleves;
+
+        if (xSerp > grosseurRoche + xRoche || xRoche > grosseurSerp + xSerp || ySerp > grosseurRoche + yRoche || yRoche > grosseurSerp + ySerp){
+            // Pas de collision ici
+            mesObs.isOnCanvas = true;
+        }else{
+            // on a collision
+            // reduire pts de vie serpent
+            if(mesObs.isOnCanvas){
+                var ptsDeVieSerp = parseInt(document.getElementById("ptsDeVie").innerHTML) - ptsToRemove;
+                document.getElementById("ptsDeVie").innerHTML = ptsDeVieSerp + ""
+                serpent.pointDeVie -= ptsToRemove;
+            }
+            mesObs.isOnCanvas = false;
+        }
+        
+    });
+}
+

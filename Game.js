@@ -2,7 +2,7 @@
 import EntreeUser from "./EntreeUser.js";
 import obsSansColli from "./obstacleCadreSansCollision.js";
 import { animationObstacleSansColli , animation} from "./animation.js";
-import { colliSerpFood , colliSerpMur , colliSerp, colliSerpMovingObs} from "./GestionCollision.js";
+import { colliSerpFood , colliSerpMur , colliSerp, colliSerpObs, colliSerpMovingObs} from "./GestionCollision.js";
 
 export default class Game
 {
@@ -100,15 +100,21 @@ export default class Game
             this.serpent.dessiner(layout,this.imgSerp);
 
         }else{
-            // quoi faire qd la tete du serpent entre en collision avec une nourriture;
+            // Collision entre le serpent et la nourriture
             nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
-            // collision entre obstacle et serpent dans le "cadre avec collision"
-            colliSerpMovingObs(monserpent,obsSurLeCanvas);
+            // Gestion collision entre le serpent et les differents types d'obstacles
+            if(colliOuPas == 2){ // on est dans le cadre sans collisions
+                colliSerpObs(monserpent,mesObs);
+            }else{
+                colliSerpMovingObs(monserpent,obsSurLeCanvas);
+            }
+
+            if(monserpent.pointDeVie <= 0){this.gameQuit();}
 
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
             
-            // collision entre serpent et lui meme ou qd pts de vie serpent <= 0
-            if(colliSerp(monserpent) || monserpent.pointDeVie <= 0){  // si le serpent rentre en collision avec lui meme !!
+            // collision entre serpent et lui meme ou qd pts de vie serpent <= 0, alors on quitte le jeu
+            if(colliSerp(monserpent)){
                 this.gameQuit();
             }
 
@@ -116,7 +122,7 @@ export default class Game
         // source: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         timeStamp = Date.now();
         
-        // qd serpent rentre en contact avec un mur dans le "cadre avec collision"
+        // qd serpent rentre en contact avec un mur dans le "cadre avec collision", ici on ici le joueur a perdu
         if( (colliOuPas == 1 &&  colliSerpMur(monserpent)) ){ 
            // alert('Vous avez perdu , Dommage!!');
             this.gameQuit();

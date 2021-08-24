@@ -57,10 +57,10 @@ new EntreeUser(serpent,game);
 serpent.corps[0].PositionX = 0;
 serpent.corps[0].PositionY = 0;
 
-//Debut de la partie
 document.getElementById("ptsDeVie").innerHTML = serpent.pointDeVie;
 document.getElementById("ptsGagnes").innerHTML = 0;
 
+//Debut de la partie
 game.gameStart();
 serpent.layout = game.layout
 

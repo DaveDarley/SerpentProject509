@@ -57,7 +57,7 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
         animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded);
     }else{
         mesObs.forEach(function(Obs){
-        Obs.placerMonObstacle(layout);
+          Obs.placerMonObstacle(layout);
         });
     }
 
