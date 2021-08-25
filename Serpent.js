@@ -26,11 +26,14 @@ export default class Serpent
         return this.corps[0].renvoiePosition();
     }
 
-    //Fonction permettant de mettre a jour les position du corps du serpent
+    /*
+    Fonction permettant de mettre a jour les position du corps du serpent, plus
+    precisement cette fonction gere comment le reste du serpent bouge qd l'utilisateur
+    change la direction de la tete du serpent
+    */
+    
     mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect){
 
-        // ex : petit prob avec l'apparition du serpent qd ca sort du cote est et 
-        // ca doit apparaitre a l'ouest 
         if(this.whichCanvas == 2){ // gere cadre sans collisions
             if (this.corps[0].positionX  > 700){
                 this.corps[0].positionX = 0 - this.teteSerpent.longueurCote;
@@ -59,14 +62,17 @@ export default class Serpent
 
     }
 
-    // Fonction permettant de gerer le repositionnnement du reste du corps du sereptn en focntion de la direction prise par la tete
+   /*
+   Comment bouge le reste du serpent qd la tete change de direction :
+
+   Comme on a stocke le corps du serpent dans un tableau, chaque corps
+   du serpent a les infos suivantes(x,y,direction,....) , et donc je 
+   parcours mon tableau et les infos de index i deviennent les infos 
+   de i+1 et les infos de i+1 deviennent i+2 , ainsi de suite.
+   */
     gestionMouvementSerpent(i,ancienX,ancienY,ancienDirection){
 
         if(this.corps.length > 1){ // si c'est juste la tete , c pas necessaire de gerer le mouvement du serpent
-
-            //console.log(this.corps.length);
-            //console.log(this.corps[i].positionX);
-            //debugger;
 
             if(i == this.corps.length){
                 return;
@@ -87,7 +93,14 @@ export default class Serpent
 
     }
 
-    //Fonction permettant d'agrandir la taille du serpent
+    /*
+    Agrandir la taille du serpent qd il mange une nourriture:
+
+    On ajoute une nouvelle case dans le tableau qui contient toutes les cases du serpent
+    Pour savoir la direction ou doit aller la nouvelle case ajoutee,
+    on suit la direction de la derniere case du serpent 
+    NB: Tous les cases du serpent sont stockes dans un tableau 
+    */
     agrandirSerpent(){
         var madirection = this.corps[this.corps.length - 1].direction;
         let allongement = new Forme(this.teteSerpent.formeSerp,25);
@@ -125,9 +138,15 @@ export default class Serpent
         return this.pointGagne;
     }
 
-    // Si utilisateur presse rien ,le serpent suit la direction de la tete
-    // Doit aussi gerer la vitesse du serpent
-    //Fonction permettant d'avancer le serpent sams entrees de l'uitlisateur
+   /*
+   Si l'utilisateur change pas la direction de la tete du serpent,
+   le serpent doit continuer de bouger dans meme direction qu'il
+   etait entrain de bouger.
+
+   Disons si le serpent allait a gauche , je deplace tete du serpent 
+   vers la gauche , la tete du serpent garde la meme direction qu'il etait , 
+   j'appelle ensuite mettreAJourSerpent qui s'occupe de bouger le reste du serpent.
+   */
    bougerSansUser(){
         var serpent = this;
         var directTeteSerpent = this.corps[0].direction;

@@ -6,7 +6,7 @@ import obsSansColli from "./obstacleCadreSansCollision.js"
     que ce soit dans le cadre avec collision ou dans le cadre sans collision
 */
 
-
+var last = 0;
 
 /*
   Fonction qui s'occupe de faire apparaitre et bouger les nourritures sur le canvas , 
@@ -18,10 +18,6 @@ import obsSansColli from "./obstacleCadreSansCollision.js"
 /*
   Cette fonction gere tout l'animation du jeu
 */
-
-
-
-var last = 0;
 
 export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp){
 
@@ -85,8 +81,8 @@ export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
       obsSurLeCanvas = checkFoodOnCanvas(obsSurLeCanvas);
     }
   
-    // Des qu'on a moins de 2 objets sur le canvas , on en cree un autre
-    if(obsSurLeCanvas.length < 2){  
+    // Des qu'on a moins de 5 objets sur le canvas , on en cree un autre
+    if(obsSurLeCanvas.length < 5){  
       var whichDirection = Math.floor(Math.random() *4); // 4 murs d'ou peuvent sortir les obstacles
       var posX; var posY;
       var grosseur = (Math.floor(Math.random() *4) * 10) + 20; // grosseur entre 20 px et 50 px

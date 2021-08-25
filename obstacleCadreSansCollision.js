@@ -11,27 +11,27 @@ export default class obstacleSansCollision {
 
 
     /*
-        Dans le cadre du cadre sans collisions , cette fonction renvoie 
-        la position(un tableau doucle [[x,y]]) a laquelle devrait etre place les obstacles sur le canvas
+        Dans le cadre du "cadre sans collisions", cette fonction renvoie 
+        la position(un tableau double [[x,y]]) a laquelle devrait etre place les obstacles sur le canvas;
+        On s'occupe aussi ici d'empecher 2 obstacles d'etre place a la meme position sur le canvas.
     */
     placeObstacleSansCollision(tabImages,mesPositions,index){
 
-        var newIndex = index+1;
+        var newIndex = index+1; ; // pour changer index dans mon tableau 
         if(tabImages.length == index){
-            console.log("Mon tableau est: "+ mesPositions);
-            return mesPositions;
+            return mesPositions;  
         }else{
-            var xPosition = (Math.floor(Math.random() * 7)*100); // x entre 0 et 600
-            var yPosition = (Math.floor(Math.random() * 7)*100); // x entre 0 et 600
+            // (x,y) choisit par le nouveau obstacle
+            var xPosition = (Math.floor(Math.random() * 7)*100); 
+            var yPosition = (Math.floor(Math.random() * 7)*100); 
 
             if(mesPositions.length == 0){
                 var newTab = [];
                 newTab.push(xPosition);newTab.push(yPosition);
                 mesPositions.push(newTab);
-                //tabImages.pop(); 
-               // i = i + 1;
                 return this.placeObstacleSansCollision(tabImages,mesPositions,newIndex);
             }else{
+                // Ici je verifie si il n'y a pas deja un obstacle au (x,y) choisit pour le nouvelle obstacle
                 for(var i = 0; i<mesPositions.length; i++){
                     if(mesPositions[i][0] == xPosition && mesPositions[i][1] == yPosition){
                         return this.placeObstacleSansCollision(tabImages,mesPositions,index);
@@ -41,7 +41,6 @@ export default class obstacleSansCollision {
                 var newTab = [];
                 newTab.push(xPosition);newTab.push(yPosition);
                 mesPositions.push(newTab);
-                //tabImages.pop();
                 return this.placeObstacleSansCollision(tabImages,mesPositions,newIndex);
             }
         }

@@ -102,6 +102,7 @@ export default class Game
         }else{
             // Collision entre le serpent et la nourriture
             nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
+
             // Gestion collision entre le serpent et les differents types d'obstacles
             if(colliOuPas == 2){ // on est dans le cadre sans collisions
                 colliSerpObs(monserpent,mesObs);
@@ -109,21 +110,13 @@ export default class Game
                 colliSerpMovingObs(monserpent,obsSurLeCanvas);
             }
 
-            if(monserpent.pointDeVie <= 0){this.gameQuit();}
-
             animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp);
-            
-            // collision entre serpent et lui meme ou qd pts de vie serpent <= 0, alors on quitte le jeu
-            if(colliSerp(monserpent)){
-                this.gameQuit();
-            }
-
         }
         // source: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         timeStamp = Date.now();
         
-        // qd serpent rentre en contact avec un mur dans le "cadre avec collision", ici on ici le joueur a perdu
-        if( (colliOuPas == 1 &&  colliSerpMur(monserpent)) ){ 
+        // qd serpent rentre en contact avec un mur dans le "cadre avec collision", avec lui meme ou son pt de vie <= 0,le joueur a perdu
+        if( (colliOuPas == 1 &&  colliSerpMur(monserpent)) || monserpent.pointDeVie <= 0 || colliSerp(monserpent)){ 
            // alert('Vous avez perdu , Dommage!!');
             this.gameQuit();
         }else{
