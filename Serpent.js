@@ -1,8 +1,11 @@
 import Forme from "./Forme.js";
 
-
+/** Un serpent */
 export default class Serpent
 {
+    /**Création du serpent avec les paramètres suivants: largeur du canvas, hauteur du canvas, la forme
+     * du serpent, le context graphique
+     */
     constructor(gameWidth, gameHeight, formeSerp,context)
     {
         this.gameWidth = gameWidth;
@@ -17,21 +20,19 @@ export default class Serpent
         this.changerDirect = false;
         this.ancienDirection  = 0
 
-        this.whichCanvas = 0; // pour que le serpent puisse savoir dans quelle cadre il joue
+        this.whichCanvas = 0; // pour que le serpent puisse savoir sur quel canvas il joue
     }
 
-    //Fonction renvoyant la position de la tete du serpent 
+    /** Fonction renvoyant la position de la tete du serpent */
     positionTete()
     {
         return this.corps[0].renvoiePosition();
     }
 
-    /*
-    Fonction permettant de mettre a jour les position du corps du serpent, plus
-    precisement cette fonction gere comment le reste du serpent bouge qd l'utilisateur
-    change la direction de la tete du serpent
+    /** Fonction permettant de mettre à jour les positions du corps du serpent. Plus précisement cette
+    fonction gère comment le reste du serpent bouge après que l'utilisateur ait changé la direction de
+    la tête du serpent
     */
-    
     mettreAJourSerpent(ancienTeteX,ancienTeteY,ancienDirect){
 
         if(this.whichCanvas == 2){ // gere cadre sans collisions
@@ -51,7 +52,7 @@ export default class Serpent
         this.gestionMouvementSerpent(1,ancienTeteX,ancienTeteY,ancienDirect);
     }
 
-    // Pour dessiner le serpent a chaque fois !!
+    /** Dessiner le serpent */ 
     dessiner(context,image)
     {
         var longueurCote = this.teteSerpent.longueurCote;
@@ -62,17 +63,15 @@ export default class Serpent
 
     }
 
-   /*
-   Comment bouge le reste du serpent qd la tete change de direction :
+    /* Comment bougé le reste du serpent quand la tête change de direction :
 
-   Comme on a stocke le corps du serpent dans un tableau, chaque corps
-   du serpent a les infos suivantes(x,y,direction,....) , et donc je 
-   parcours mon tableau et les infos de index i deviennent les infos 
-   de i+1 et les infos de i+1 deviennent i+2 , ainsi de suite.
-   */
+    Comme on a stocké le corps du serpent dans un tableau, chaque partie du corps du serpent a les infos
+    suivantes (x,y,direction,....), et donc je parcours mon tableau et les infos de index i deviennent
+    les infos de i+1 et les infos de i+1 deviennent i+2, ainsi de suite.
+    */
     gestionMouvementSerpent(i,ancienX,ancienY,ancienDirection){
 
-        if(this.corps.length > 1){ // si c'est juste la tete , c pas necessaire de gerer le mouvement du serpent
+        if(this.corps.length > 1){ // si c'est juste la tête , c pas nécessaire de gérer le mouvement du serpent
 
             if(i == this.corps.length){
                 return;
@@ -94,12 +93,12 @@ export default class Serpent
     }
 
     /*
-    Agrandir la taille du serpent qd il mange une nourriture:
+    Agrandir la taille du serpent après qu'il ait mangé une nourriture:
 
-    On ajoute une nouvelle case dans le tableau qui contient toutes les cases du serpent
-    Pour savoir la direction ou doit aller la nouvelle case ajoutee,
-    on suit la direction de la derniere case du serpent 
-    NB: Tous les cases du serpent sont stockes dans un tableau 
+    On ajoute une nouvelle case dans le tableau qui contient toutes les cases du serpent. Pour savoir la
+    direction ou doit aller la nouvelle case ajoutee, on suit la direction de la dernière case du 
+    serpent. 
+    NB: Tous les cases du serpent sont stockées dans un tableau 
     */
     agrandirSerpent(){
         var madirection = this.corps[this.corps.length - 1].direction;
@@ -132,22 +131,21 @@ export default class Serpent
         this.corps.push(allongement);
     }
 
-    //Fonction renvoyant les points gagnes 
+    /** Fonction renvoyant les points gagnés */
     pointGagne()
     {
         return this.pointGagne;
     }
 
-   /*
-   Si l'utilisateur change pas la direction de la tete du serpent,
-   le serpent doit continuer de bouger dans meme direction qu'il
-   etait entrain de bouger.
+    /**
+    Si l'utilisateur ne change pas la direction de la tête du serpent, le serpent doit continuer de 
+    bouger dans la même direction qu'il était en train de bouger.
 
-   Disons si le serpent allait a gauche , je deplace tete du serpent 
-   vers la gauche , la tete du serpent garde la meme direction qu'il etait , 
-   j'appelle ensuite mettreAJourSerpent qui s'occupe de bouger le reste du serpent.
-   */
-   bougerSansUser(){
+    Disons si le serpent allait à gauche, je déplace la tête du serpent vers la gauche, la tête du
+    serpent garde la même direction qu'il avait. J'appelle ensuite mettreAJourSerpent qui s'occupe de
+    bouger le reste du serpent.
+    */
+    bougerSansUser(){
         var serpent = this;
         var directTeteSerpent = this.corps[0].direction;
         var ancienTeteX ;

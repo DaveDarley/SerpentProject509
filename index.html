@@ -1,60 +1,59 @@
 <!doctype html>
 
-<!doctype html>
-
 <html class="Page">
-<head>
- <title>Page de Bienvenue Jeu Serpent</title>
- <link rel="stylesheet" href="index.css">
-</head>
+  <head>
+    <title>Page de Bienvenue Jeu Serpent</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
 
-<body>
-  <div class="Bienvenue">
-    <h1 style="text-align:center;">BIENVENUE</h1>
-    <h2 style="text-align:center;">Veuillez choisir l'un de ces 2 modes de jeu</h2>
-    <h3 class="choixModeJeu" onclick="location.href='cadreSansCollision.html';">1) Cadre sans collision</h3>
-    <h3 class="choixModeJeu" onclick="location.href='cadreAvecCollision.html';">2) Cadre avec collision</h3>
-  </div>
-  <!-- consignes sur comment jouer le jeu!! -->
-  <div class="modal" id="modal" >
-    
-    <!-- entete de mon pop up-->
-    <div class="modal-header">
-      <div class="title">Consignes du jeu </div>
-      <button class="close-button">&times;</button>
+  <body>
+
+    <div class="Bienvenue">
+      <h1 style="text-align:center;">BIENVENUE</h1>
+      <h2 style="text-align:center;">Veuillez choisir l'un de ces 2 modes de jeu</h2>
+      <h3 class="choixModeJeu" onclick="location.href='cadreSansCollision.html';">1) Cadre sans collision</h3>
+      <h3 class="choixModeJeu" onclick="location.href='cadreAvecCollision.html';">2) Cadre avec collision</h3>
     </div>
 
-    <!-- faut arranger le body apres -->
-    <div class="modal-body">
-      <p>1)Cadre sans collisions:</p>
-      <div class="rules">
-        Si vous frappez un obstacle, votre points de vie 
-        baisse. 
-      </br> </br>
-        Si votre point de vie atteint 0, vous mourrez.
-    </br> </br>
-        Mangez des fruits pour augmenter vos points de vie.
+    <!-- consignes sur comment jouer le jeu!! -->
+    <div class="modal" id="modal" >
+      
+      <!-- entete de mon pop up-->
+      <div class="modal-header">
+        <div class="title">Consignes du jeu </div>
+        <button class="close-button">&times;</button>
       </div>
 
-      <p>2) Cadre avec collision:</p>
-      <div class="rules">
-        Si un obstacle vous frappe, vous perdez des points de vie.
-      </br> </br>
-        Si vous frappez le cadre du jeu vous mourrez.
-      </br> </br>
-        Si votre point de vie atteint 0, vous mourrez.
-      </br> </br>
-        Mangez des fruits pour augmenter vos points de vie.
+      <!-- faut arranger le body apres -->
+      <div class="modal-body">
+        <p>1)Cadre sans collisions:</p>
+        <div class="rules">
+          Si vous frappez un obstacle, votre points de vie 
+          baisse. 
+          </br> </br>
+          Si votre point de vie atteint 0, vous mourrez.
+          </br> </br>
+          Mangez des fruits pour augmenter vos points de vie.
+        </div>
+
+        <p>2) Cadre avec collision:</p>
+        <div class="rules">
+          Si un obstacle vous frappe, vous perdez des points de vie.
+          </br> </br>
+          Si vous frappez le cadre du jeu vous mourrez.
+          </br> </br>
+          Si votre point de vie atteint 0, vous mourrez.
+          </br> </br>
+          Mangez des fruits pour augmenter vos points de vie.
+        </div>
+        
+        </br> </br> 
+        BONNE CHANCE
+      </div>
+
     </div>
-      
-  </br> </br> 
-      BONNE CHANCE
-    </div>
-  </div>
-  <!-- fin consignes jeu-->
+    <!-- fin consignes jeu-->
 
+  </body>
 
-
-
-</body>
 </html>

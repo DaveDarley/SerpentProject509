@@ -1,5 +1,7 @@
+/** Une forme */
 export default class Forme
 {
+    /** Création d'une forme */
     constructor(figureGeo, longueurCote)
     {
         this.forme = figureGeo;
@@ -11,12 +13,14 @@ export default class Forme
         this.direction = 39;
     }
 
+    /** Changer la position de la forme */
     changerPosition(positionX,positionY)
     {
         this.positionX = positionX;
         this.positionY = positionY;
     }
 
+    /** Renvoyer la position de cette forme */
     renvoiePosition()
     {
         return [this.positionX,this.positionY];

@@ -5,6 +5,7 @@
 .choixModeJeu:hover {
   font-size: 50px;
 }
+
 .choixModeJeu {
   text-align: center;
   color:white;
@@ -15,6 +16,7 @@
   line-height: 50px;
   display: block;
 }
+
 .gameScreen {
   border: 1px solid black;
 }
@@ -23,11 +25,13 @@
   display:flex;
 
 }
+
 .narrow {
   width: 700px;
   height: 700px;
   background-image: url("./images/backgroundCanvas.png")
 }
+
 .wide {
   flex: 1;
   /* Grow to rest of container */
@@ -71,9 +75,7 @@
   
 }
 
-
 /* code css pour mon modal */
-
 .modal {
   position: fixed; /* qd le user scroll up/down l'ecran, on veut que le modal bouge avec lui */
   border: 1px solid black;
@@ -89,8 +91,6 @@
  /* top: 40%;
   /*left: 100%;*/
  /* transform: translateY(-90%); /* A bien revoir le fonctionnement du translate */
-
-
 
  animation: 1s ease-out 0s 1 slideInFromLeft;
 }
@@ -122,8 +122,6 @@
   padding: 10px 15px; /* Meme padding que le modal-header */
   font-family: 'Games', sans-serif;
 }
-
-
 
 @keyframes slideInFromLeft {
   0% {

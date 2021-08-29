@@ -4,8 +4,10 @@ import obsSansColli from "./obstacleCadreSansCollision.js";
 import { animationObstacleSansColli , animation} from "./animation.js";
 import { colliSerpFood , colliSerpMur , colliSerp, colliSerpObs, colliSerpMovingObs} from "./GestionCollision.js";
 
+/* Une partie */
 export default class Game
 {
+    /** Création d'une partie */
     constructor(canvas, layout, serpent, gameWidth,gameHeight,  imgObs ,imgFood, imgObsSansColli, imgSerp )
     {
         this.canvas = canvas;
@@ -21,12 +23,12 @@ export default class Game
     }
     
 
-        /**Initialiser le jeu en telechargeant les images */
-        /*
-        Function pour load tous les images de nourriture avant d'appeler requestAnimationFrame()
-        https://gist.github.com/pixelhandler/1081922/d0b9fd3ca92d84947a6c834066da9c90d3d4c82b
-        */
-        gameInitialise(tabImagesAload,initSerpEtClavier)
+    /** Initialiser le jeu en telechargeant les images */
+    /*
+    Fonction pour charger tous les images de nourriture avant d'appeler la fonction requestAnimationFrame()
+    https://gist.github.com/pixelhandler/1081922/d0b9fd3ca92d84947a6c834066da9c90d3d4c82b
+    */
+    gameInitialise(tabImagesAload,initSerpEtClavier)
     {
         if(initSerpEtClavier == 1){
             var img1 = new Image();
@@ -46,6 +48,7 @@ export default class Game
         }
     }
 
+    /** Démarrer la partie */
     gameStart(){
 
         var colliOuPas;
@@ -69,16 +72,17 @@ export default class Game
         // mais elle n'est pas vraiment necessaire encore!!
         let obs = new obsSansColli(0,0,0,0,0);
     
-        // la g les positions ou je peux placer mes differents obstacle
+        // Les positions possibles de mes différents obstacles
         posObsCadreSansColli = obs.placeObstacleSansCollision(this.imgObsSansColli,[],0);
         mesObs = animationObstacleSansColli(posObsCadreSansColli,this.imgObsSansColli);
 
-        this.serpent.whichCanvas = colliOuPas; // a mettre commentaire
+        //Renseigner au serpent si le canvas a un cadre ou pas
+        this.serpent.whichCanvas = colliOuPas;
     
         this.gameLoop(this.layout,nourritureSurLeCanvas,this.imgFood,obsSurLeCanvas,this.imgObs,colliOuPas,posObsCadreSansColli,this.imgObsSansColli,mesObs,this.serpent,this.imgSerp,0);
     }
 
-    
+    /** Gérer le deplacement des objets sur le canvas */
     gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp){
        
         layout.clearRect(0,0,700,700);
@@ -87,7 +91,7 @@ export default class Game
             nourritureSurLeCanvas.forEach(function(food){
                 layout.drawImage(food.image,food.posX,food.posY,food.getGrosseurNourriture(),food.getGrosseurNourriture())
             });
-            // Les obstacles se deplacent sur le canvas ssi on est dans le cadre avec collision
+            // Les obstacles se déplacent sur le canvas ssi on est dans le cadre avec collision
             if(colliOuPas == 1){ 
                 obsSurLeCanvas.forEach(function(obs){
                     layout.drawImage(obs.image,obs.posX,obs.posY,obs.grosseur,obs.grosseur);
@@ -100,13 +104,14 @@ export default class Game
             this.serpent.dessiner(layout,this.imgSerp);
 
         }else{
+            
             // Collision entre le serpent et la nourriture
             nourritureSurLeCanvas = colliSerpFood(nourritureSurLeCanvas,monserpent);
 
-            // Gestion collision entre le serpent et les differents types d'obstacles
+            // Gestion collision entre le serpent et les différents types d'obstacles
             if(colliOuPas == 2){ // on est dans le cadre sans collisions
                 colliSerpObs(monserpent,mesObs);
-            }else{
+            }else{ // on est dans le cadre avec les collisions, les obstacles bougent sur le canvas
                 colliSerpMovingObs(monserpent,obsSurLeCanvas);
             }
 
@@ -115,7 +120,7 @@ export default class Game
         // source: https://stackoverflow.com/questions/221294/how-do-you-get-a-timestamp-in-javascript
         timeStamp = Date.now();
         
-        // qd serpent rentre en contact avec un mur dans le "cadre avec collision", avec lui meme ou son pt de vie <= 0,le joueur a perdu
+        // Quand le serpent rentre en contact avec un mur dans le "cadre avec collision", avec lui même, ou son point de vie <= 0,le joueur a perdu
         if( (colliOuPas == 1 &&  colliSerpMur(monserpent)) || monserpent.pointDeVie <= 0 || colliSerp(monserpent)){ 
            // alert('Vous avez perdu , Dommage!!');
             this.gameQuit();
@@ -124,9 +129,7 @@ export default class Game
         }  
     }
 
-
-
-
+    /** Mettre en pause la partie */
     gamePause(){
         if(this.state == "pause"){
           this.state = "Running";
@@ -137,15 +140,16 @@ export default class Game
         }
     }
 
+    /** Redémarrer la partie */
     gameRestart(){
         location.reload(); 
         this.state = "Running";
     }
 
+    /** Mettre fin à la partie */
     gameQuit(){
         window.location.href='index.html';
     }
-
 
 }
 

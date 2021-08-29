@@ -1,18 +1,17 @@
 /*
-    ici je gere collisione entre tete serpent et nourriture 
-    mais aussi entre tete serpent et obstacle
+    Gestion des collisions entre tête serpent et nourriture 
+    mais aussi entre tête serpent et obstacle
 
-    NB: on a la grosseur des nourritures et des obstacles , pour gerer 
+    NB: on a la grosseur des nourritures et des obstacles, pour gérer 
     la collision aux 4 coins des nourritures/obstacles 
 
-    la tete de serpent peut apparaitre a gauche , droite , haut , en bas de la nourriture
+    la tête de serpent peut apparaitre à gauche, droite, haut, en bas de la nourriture
 */
 
-
-/*
-    Ici on gere tout collision entre tete du serpent et nourriture
-    c-a-d qd le serpent mange la nourriture
-    Reference sur comment gerer la collision: https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
+/**
+Fonction gérant toutes collisions entre tête du serpent et nourriture (quand le serpent mange la nourriture)
+Référence sur les manières de gérer une collision:
+https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
 */
 export function colliSerpFood(tabFood,serpent){
     var teteSerpent = serpent.corps[0];
@@ -39,13 +38,13 @@ export function colliSerpFood(tabFood,serpent){
     return tabFood;
 }
 
-
+/** Fonction gérant les collisions entre le serpent et le cadre du canvas */
 export function colliSerpMur(serpent){
     var colli = false;
     if (serpent.corps[0].positionX + serpent.teteSerpent.longueurCote >= 700){
         colli = true;
     }
-    if(serpent.corps[0].positionX < 0){ // <= normalement mais comme on commence a 0,0 ca fera pas de sens
+    if(serpent.corps[0].positionX < 0){ // <= normalement mais comme on commence à 0,0, ça ne fera pas de sens
         colli = true;
     }
     if(serpent.corps[0].positionY + serpent.teteSerpent.longueurCote >= 700) {
@@ -57,29 +56,30 @@ export function colliSerpMur(serpent){
     return colli;
 }
 
+/** Fonction vérifiant si le serpent est en collision avec soi-même */
 export function colliSerp(serpent){
     var teteSerp = serpent.corps[0];
     var colli = false;
     for(var i=1; i<serpent.corps.length; i++){ 
 
-        // check collision des 4 cotes
+        // vérification collision des 4 côtés
         
-              // verification collision vers le bas
+            // vérification collision vers le bas
             if(teteSerp.positionX == serpent.corps[i].positionX && serpent.corps[i].positionY == teteSerp.positionY + teteSerp.longueurCote  && teteSerp.direction == 40){
                 colli = true;
             }
 
-            // cote ouest:
+            // côté ouest:
             if(serpent.corps[i].positionX == teteSerp.positionX + teteSerp.longueurCote && serpent.corps[i].positionY == teteSerp.positionY && teteSerp.direction == 39 ){
                 colli = true;
             }
 
-            // cote est:
+            // côté est:
             if(serpent.corps[i].positionX + serpent.corps[i].longueurCote == teteSerp.positionX  && serpent.corps[i].positionY == teteSerp.positionY && teteSerp.direction == 37){
                 colli = true;
             }
 
-            // cote sud:
+            // côté sud:
             if(teteSerp.positionX == serpent.corps[i].positionX && serpent.corps[i].positionY + serpent.corps[i].longueurCote == teteSerp.positionY && teteSerp.direction == 38){
                 colli = true;
             }
@@ -88,11 +88,12 @@ export function colliSerp(serpent){
 }
 
 /*
-    Importante lecon:
-    Au lieu d'essayer de prendre ts les cas ou ca marche (ya beaucoup);
-    mieux vaut chercher tous les cas ou ca marche pas .
+Importante leçon:
+    Au lieu d'essayer de prendre tous les cas ou ça marche (il y en a beaucoup), mieux vaut chercher 
+    tous les cas où ça marche pas .
 
-    Reference : https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
+    Référence:
+    https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
 */
 export function colliSerpMovingObs(serpent,tabRoches){
     var corpsSerp = serpent.corps;
@@ -123,15 +124,14 @@ export function colliSerpMovingObs(serpent,tabRoches){
     });
 }
 
-// Collision entre serpent et obstacles , dans le cadre sans collisions
+/** Gestion des collisions entre serpent et obstacles sur le canvas ne prennant pas en compte les 
+ * collisions avec le cadre */
 export function colliSerpObs(serpent,tabRoches){
     var teteSerp = serpent.corps[0];
-
     var xSerp = teteSerp.positionX;
     var ySerp = teteSerp.positionY;
     var grosseurSerp = teteSerp.longueurCote;
 
-    
     tabRoches.forEach(function(mesObs){
         var xRoche = mesObs.posX;
         var yRoche = mesObs.posY;
@@ -143,8 +143,8 @@ export function colliSerpObs(serpent,tabRoches){
             // Pas de collision ici
             mesObs.isOnCanvas = true;
         }else{
-            // on a collision
-            // reduire pts de vie serpent
+            // on a une collision
+            // réduire les points de vie du serpent
             if(mesObs.isOnCanvas){
                 var ptsDeVieSerp = parseInt(document.getElementById("ptsDeVie").innerHTML) - ptsToRemove;
                 document.getElementById("ptsDeVie").innerHTML = ptsDeVieSerp + ""
