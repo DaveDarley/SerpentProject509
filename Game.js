@@ -133,10 +133,10 @@ export default class Game
     gamePause(){
         if(this.state == "pause"){
           this.state = "Running";
-          document.getElementById("pause").innerHTML = "1) Pause";
+          document.getElementById("pause").innerHTML = " Pause";
         }else{
             this.state = "pause";
-            document.getElementById("pause").innerHTML = "1) Resume";
+            document.getElementById("pause").innerHTML = " Resume";
         }
     }
 

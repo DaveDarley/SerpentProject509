@@ -30,7 +30,7 @@ export function colliSerpFood(tabFood,serpent){
             // Pas de collision ici
         }else{
             ptsToAdd = parseInt(document.getElementById("ptsGagnes").innerHTML) + food.ptsDeVie;
-            document.getElementById("ptsGagnes").innerHTML = ptsToAdd + ""
+            document.getElementById("ptsGagnes").innerHTML = ptsToAdd + "";
             food.isOnCanvas = false;
             serpent.agrandirSerpent();
         }

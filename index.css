@@ -6,6 +6,11 @@
   font-size: 50px;
 }
 
+body
+{
+  background-color: #abf0c5;
+}
+
 .choixModeJeu {
   text-align: center;
   color:white;
@@ -23,17 +28,26 @@
 
 .parent {
   display:flex;
-
 }
 
-.narrow {
+.narrowSansCollision{
   width: 700px;
   height: 700px;
   background-image: url("./images/backgroundCanvas.png")
 }
 
+.narrowCollision{
+  width: 700px;
+  height: 700px;
+  border: solid red 10px;
+  background-image: url("./images/backgroundCanvas.png")
+}
+
 .wide {
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
   /* Grow to rest of container */
   margin-left: 250px;
 }
@@ -48,13 +62,30 @@
 }
 
 .infosSurLaPartie {
-  text-align:center;
+  justify-content: space-around;
+  font-size: 25px;
+}
+
+.infosSurLaPartie div{
+  border: solid black;
+  padding: 20px;
+  border-radius: 50%;
+  margin-left: 170px;
+  margin-right: 170px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(226, 226, 226);
+  text-align: center;
+}
+
+.infosSurLaPartie :hover {
+  background-color: rgb(148, 147, 147);
+  font-size: 27px;
 }
 
 .Page{
   background-color: antiquewhite;
   background-image: url(https://cdn.discordapp.com/attachments/820323441818992690/877233927729852436/Snake-Illustration-with-Transparent-Background-680x680.png);
-  
 }
 
 .Bienvenue{

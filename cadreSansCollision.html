@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html>
+<html lang="fr">
 
   <head>
     <title>Cadre Sans Collision</title>
@@ -12,20 +12,24 @@
     <h1 style="text-align:left;">Cadre Sans Collisions</h1>
 
     <div class="parent">
-      <div class="narrow"> <canvas id="sansColli" class="gameScreen" width="700px" height="700px"></canvas>  </div>
+      <div class="narrowSansCollision"> <canvas id="sansColli" class="gameScreen" width="700px" height="700px"></canvas>  </div>
       
       <div class="wide">
-        <h3>POINTS GAGNES</h3>
-        <div class="afficheInfos" id="ptsGagnes"></div>
-        <h3>POINTS DE VIE DU SERPENT</h3>
-        <div class="afficheInfos" id="ptsDeVie"></div>
-      </div>
-    </div>
+        <div>
+          <h3>POINTS GAGNÉS</h3>
+          <div class="afficheInfos" id="ptsGagnes"></div>
+          <h3>POINTS DE VIE DU SERPENT</h3>
+          <div class="afficheInfos" id="ptsDeVie"></div>
+        </div>
+        
+        <div class="infosSurLaPartie">
+          <div id="pause" > Pause </div>
+          <div id="quit" > Quitter la partie </div>
+          <div id="restart"> Recommencer la partie </div>
+        </div>
 
-    <div class="infosSurLaPartie">
-      <h3 id="pause">1) Pause </h3>
-      <h3 id="quit">2) Quitter la partie</h3>
-      <h3 id="restart">3) Recommencer la partie</h3>
+      </div>
+
     </div>
 
   </body>
