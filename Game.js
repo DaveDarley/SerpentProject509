@@ -120,7 +120,7 @@ export default class Game
         
         // Quand le serpent rentre en contact avec un mur dans le "cadre avec collision", avec lui même, ou son point de vie <= 0,le joueur a perdu
         if( (colliOuPas == 1 &&  colliSerpMur(monserpent)) || monserpent.pointDeVie <= 0 || colliSerp(monserpent)){ 
-            alert('Vous avez perdu, Dommage !!!');
+            //alert('Vous avez perdu, Dommage !!!');
             this.gameQuit();
         }else{
             window.requestAnimationFrame(()=>this.gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp) ); 
