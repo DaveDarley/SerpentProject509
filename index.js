@@ -1,7 +1,7 @@
 // Lien vers mes png : http://pngimg.com/images/nature/stone
 // Lancer et arrêter un requestanimationFrame : https://stackoverflow.com/questions/10735922/how-to-stop-a-requestanimationframe-recursion-loop
 
-import Game from "./game.js";
+import Game from "./Game.js";
 import EntreeUser from "./EntreeUser.js";
 import Serpent from "./Serpent.js"
 
