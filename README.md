@@ -14,3 +14,5 @@ Il existe 2 scenarios lors desquels le serpent perd de ses point de vie :
 Arrive a 0, le serpent meurt et vous perdez.
 
 Nous apporterons des modifications dans le futur pour ameliorer le design et les possibles dysfonctionnements.
+
+Pour jouer veuillez visiter le site suivant : https://davedarley.github.io/SerpentProject509/index.html
