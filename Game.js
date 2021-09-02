@@ -23,7 +23,7 @@ export default class Game
 
     /** Initialiser le jeu en telechargeant les images */
     /*
-    Fonction pour charger tous les images de nourriture avant d'appeler la fonction requestAnimationFrame()
+    Fonction pour charger tous les images de nourriture et d'obstacle avant d'appeler la fonction requestAnimationFrame()
     https://gist.github.com/pixelhandler/1081922/d0b9fd3ca92d84947a6c834066da9c90d3d4c82b
     */
     gameInitialise(tabImagesAload,initSerpEtClavier)
@@ -84,6 +84,8 @@ export default class Game
     gameLoop(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCanvas,obsImageLoaded,colliOuPas,posObsCadreSansColli,obsImageSansColliLoaded,mesObs,monserpent,formeSerp,timeStamp){
        
         layout.clearRect(0,0,700,700);
+
+        
         if(this.state == "pause"){
            
             nourritureSurLeCanvas.forEach(function(food){

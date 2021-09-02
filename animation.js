@@ -21,7 +21,7 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
   // layout.clearRect(0,0,700,700);
   // tout nourriture qui excède les limites du canvas est enlevé de la liste de nourriture à dessiner
   if(nourritureSurLeCanvas.length != 0){
-  nourritureSurLeCanvas = checkFoodOnCanvas(nourritureSurLeCanvas);
+    nourritureSurLeCanvas = checkFoodOnCanvas(nourritureSurLeCanvas);
   }
   
   // Si le nombre de nourriture sur le canvas < 2, alors on ajoute une autre nourriture
@@ -66,7 +66,7 @@ export function animation(layout,nourritureSurLeCanvas,lesNourritures,obsSurLeCa
 }
 
 /*Dans le cadre avec collision, cette fonction s'occupe de déplacer les différents obstacles sur le
-  canvas. Les obstacles sort des 4 murs du canvas, on a un maximum de 2 obstacles en même temps sur 
+  canvas. Les obstacles sort des 4 murs du canvas, on a un maximum de 5 obstacles en même temps sur 
   le canvas; dès qu'un obstacle quitte le canvas, un autre apparait automatiquement !!
 */
 export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
@@ -88,7 +88,7 @@ export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
       case 0:  // Mur Nord
         document.getElementById("obsFromWhere").innerHTML = "NORD";
         posX = (Math.floor(Math.random() *8) * 100) ; 
-        posY = 0 - grosseur;  // pour avoir une entrée coulante de l'image sur le canvas 
+        posY = 0 - grosseur;  // pour avoir une entrée smooth de l'image sur le canvas 
         break;
       case 1: // Mur Est
         document.getElementById("obsFromWhere").innerHTML = "EST";
@@ -119,7 +119,7 @@ export function animationObstacleColli(layout,obsSurLeCanvas,obsImageLoaded){
 /*Idée:
   Avec le cadre sans collision, les obstacles sont placés sur le canvas dès le debut du jeu, et change
   jamais de position, sauf si le joueur recommence la partie.
-  Cette fonction renvoie un tableau d'obstacle qu'on dessinera sur le canvas à chaque animation
+  Cette fonction renvoie un tableau d'obstacle ayant chacun une position (x,y),grosseur,etc.. qu'on dessinera sur le canvas à chaque animation
 */
 export function animationObstacleSansColli(tabPosObs,imgObs){
 
@@ -138,6 +138,7 @@ export function animationObstacleSansColli(tabPosObs,imgObs){
 /*
 Fonction qui enlève tous les nourritures et/ou obstacles qui ne se trouve plus sur le canvas en 
 enlevant du tableau ces nourriture et/ou ces obstacles
+NB: Qd un obstacle/nourriture n'est plus sur le canvas, son attribut isOnCanvas devient FALSE
 */
 export function checkFoodOnCanvas(tabFood){
   for(var i = 0; i<tabFood.length; i++){

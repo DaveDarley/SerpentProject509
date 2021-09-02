@@ -39,6 +39,7 @@ export default class obstacleSansCollision {
                     }
                 }
                 // Si il n'y a pas déjà un obstacle à la position choisie par l'obstacle
+                // on met le nouveau obstacle a cette position
                 var newTab = [];
                 newTab.push(xPosition);newTab.push(yPosition);
                 mesPositions.push(newTab);

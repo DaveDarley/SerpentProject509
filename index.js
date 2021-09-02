@@ -16,7 +16,7 @@ var mesNourritures = [
   "./images/img6.png"
 ]
 
-/* Les images d'obstacles à afficher sur le canvas prennant en compte les collisions avec le cadre */
+/* Les images d'obstacles à afficher sur le canvas prenant en compte les collisions avec le cadre */
 var mesObstacles = [
   "./images/obsColli1.png",
   "./images/obsColli2.png",

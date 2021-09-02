@@ -1,7 +1,7 @@
 /** Une nourriture */
 export default class Nourriture {
 
-  /** Création du serpent avec les paramètres suivants: l'image de la nourriture, les points de vie que 
+  /** Création de la nourriture avec les paramètres suivants: l'image de la nourriture, les points de vie que 
    * donne la nourriture, sa grosseur, son abscisse, son ordonnée, sa vitesse, sa direction, variable 
    * indiquant si la nourriture est sur le canvas ou pas*/
   constructor(image,ptsDeVie,grosseur,posX,posY,vitesse,direction,isOnCanvas){
