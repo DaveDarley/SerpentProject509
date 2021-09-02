@@ -1,5 +1,3 @@
-
-import EntreeUser from "./EntreeUser.js";
 import obsSansColli from "./obstacleCadreSansCollision.js";
 import { animationObstacleSansColli , animation} from "./animation.js";
 import { colliSerpFood , colliSerpMur , colliSerp, colliSerpObs, colliSerpMovingObs} from "./GestionCollision.js";
