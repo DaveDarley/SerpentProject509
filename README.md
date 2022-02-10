@@ -15,4 +15,4 @@ Arrive a 0, le serpent meurt et vous perdez.
 
 Nous apporterons des modifications dans le futur pour ameliorer le design et les possibles dysfonctionnements.
 
-Pour jouer veuillez visiter le site suivant : https://davedarley.github.io/SerpentProject509/index.html
+Pour jouer veuillez visiter le site suivant : https://davedarley.github.io/SerpentProject509/index.html et ensuite choisir l'option 1 ou l'option 2.
